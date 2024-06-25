@@ -5,6 +5,8 @@ import {
 } from 'react-icons/md';
 import { FaBookBookmark, FaBookOpenReader, FaChalkboardUser, FaCircleDollarToSlot, FaDollarSign, FaFileShield, FaHandHoldingHand, FaHandshake, FaImages, FaMoneyBillTransfer, FaMoneyCheckDollar, FaNewspaper, FaUserTie } from "react-icons/fa6";
 import { GiMoneyStack } from "react-icons/gi";
+import { FaUserCircle } from "react-icons/fa";
+
 
 export interface IRoute {
   name: string;
@@ -27,7 +29,7 @@ export const routes: Array<IRoute> = [
     name: 'Admin',
     layout: '/admin',
     path: '/admin',
-    icon: FaMoneyBillTransfer,
+    icon: FaUserCircle,
   },
 
 ];

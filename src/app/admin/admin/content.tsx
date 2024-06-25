@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { adminService } from "services";
+import ModalDelete from "./modalDelete";
 
 const fecthData = async (q?: string) => {
   try {
@@ -75,6 +76,13 @@ export default function Content() {
           columns={[{ name: "username", label: "username" }, {name:"fullname", label:"Nama Lengkap"}]}
           rows={filteredData}
           rowActions={rowActions}
+        />
+      )}
+      {deleteModal.isOpen && activeItem && (
+        <ModalDelete
+          activeItem={activeItem}
+          isOpen={deleteModal.isOpen}
+          onClose={handleDeleteClose}
         />
       )}
     </Box>
