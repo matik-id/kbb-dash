@@ -14,7 +14,6 @@ import ModalReset from "./modalRpw";
 const fecthData = async (role: string | null, q?: string) => {
   try {
     const response = await userService.getUsers({
-      role,
       q,
     });
 

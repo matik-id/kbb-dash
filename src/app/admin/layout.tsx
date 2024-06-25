@@ -9,7 +9,7 @@ import Footer from 'components/footer/FooterAdmin';
 import Sidebar from 'components/sidebar/Sidebar';
 import { SidebarContext } from 'contexts/SidebarContext';
 import { PropsWithChildren, Suspense, useEffect, useState } from 'react';
-import {routes, satkerRoutes, eselonRoutes, klnRoutes} from 'routes';
+import {routes} from 'routes';
 import { useAuthStore } from 'store';
 
 interface DashboardLayoutProps extends PropsWithChildren {
@@ -22,18 +22,8 @@ export default function AdminLayout(props: DashboardLayoutProps) {
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
 	const auth = useAuthStore();
-	const role = auth && auth.user?.role ? auth.user?.role : 'admin';
 
   let menus = routes;
-
-  if (role === 'satker') {
-    menus = satkerRoutes;
-  } else if (role === 'eselon') {
-    menus = eselonRoutes;
-  } else if (role === 'kln') {
-    menus = klnRoutes;
-  }
-
 
   useEffect(() => {
     window.document.documentElement.dir = 'ltr';

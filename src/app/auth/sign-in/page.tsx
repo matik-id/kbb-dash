@@ -55,14 +55,12 @@ export default function SignIn() {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       try {
         const response = await authService.login(values);
-        Cookies.set("Authorization", response.token);
-        Cookies.set("Role", response.role);
-        auth.setToken(response.token);
+        Cookies.set("Authorization", response.data.access_token);
+        auth.setToken(response.data.access_token);
         auth.setUser({
-          user_id: response.id,
-          name: response.name,
-          role: response.role,
-          email: response.email,
+          user_id: response.data.user_id,
+          name: response.data.fullname,
+          phone: response.data.phone,
         });
 
         setStatus({ success: true });
@@ -140,7 +138,7 @@ export default function SignIn() {
                 variant="auth"
                 fontSize="sm"
                 ms={{ base: "0px", md: "0px" }}
-                type="email"
+                type="text"
                 placeholder="mail@example.com"
                 mb="24px"
                 onChange={formik.handleChange}

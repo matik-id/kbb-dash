@@ -8,16 +8,17 @@ import {
   FormControl,
   useToast,
   Button,
+  Select,
+  FormLabel,
 } from "@chakra-ui/react";
 
 // Assets
 import InputText from "components/Form/InputText";
 import { Formik } from "formik";
-import { useRouter, useSearchParams } from "next/navigation";
-import { userService } from "services";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { adminService } from "services";
 import * as Yup from "yup";
-import YupPassword from "yup-password";
-YupPassword(Yup);
 
 export default function Page() {
   const toast = useToast({
@@ -27,9 +28,8 @@ export default function Page() {
   });
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const router = useRouter();
+  const [type, setType] = useState("position");
 
-  const searchParams = useSearchParams();
-  const roleParam = searchParams.get("role");
   return (
     <>
       <Box
@@ -49,52 +49,32 @@ export default function Page() {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Pengguna ({roleParam})
+            Tambah Admin
           </Text>
           <hr />
           <Formik
             enableReinitialize
             initialValues={{
-              name: "",
-              email: "",
+              username: "",
+              fullname: "",
               password: "",
-              repass: "",
-              eselon1ID: "",
-              role: roleParam ? roleParam : "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required("Kolom ini wajib diisi"),
-              email: Yup.string().required("Kolom ini wajib diisi"),
+              fullname: Yup.string().required("Kolom ini wajib diisi"),
               password: Yup.string()
-                .max(255)
-                .min(8)
-                .minLowercase(
-                  1,
-                  "password must contain at least 1 lower case letter"
-                )
-                .minUppercase(
-                  1,
-                  "password must contain at least 1 upper case letter"
-                )
-                .minNumbers(1, "password must contain at least 1 number")
-                .required("Kolom ini wajib diisi"),
-              repass: Yup.string()
-                .oneOf([Yup.ref("password"), ""], "Password tidak cocok")
-                .required("Konfirmasi password wajib diisi"),
             })}
             onSubmit={async (values, { setStatus, setSubmitting }) => {
-              let mode = "Tambah";
               try {
                 setStatus({ success: true });
                 setSubmitting(false);
-                await userService.createUser(values);
+                await adminService.createAdmin(values);
                 toast({
                   status: "success",
-                  title: mode + " data berhasil",
+                  title: "Tambah data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/user?role=" + roleParam);
+                router.push("/admin/admin");
               } catch (error: any) {
                 toast({
                   status: "error",
@@ -110,7 +90,6 @@ export default function Page() {
             }}
           >
             {({
-              setFieldValue,
               handleSubmit,
               values,
               isSubmitting,
@@ -120,29 +99,29 @@ export default function Page() {
               handleChange,
             }) => (
               <form onSubmit={handleSubmit}>
-                <SimpleGrid columns={2} gap="20px" mt={"20px"}>
+                <SimpleGrid columns={3} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="Nama Lengkap"
-                      name="name"
-                      placeholder="Nama"
+                      label="username"
+                      name="username"
+                      placeholder="Isi username"
                       type="text"
-                      error={touched.name ? errors.name : ""}
+                      error={touched.username ? errors.username : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.name}
+                      value={values.username}
                     />
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="Email"
-                      name="email"
-                      placeholder="Email"
-                      type="email"
-                      error={touched.email ? errors.email : ""}
+                      label="fullname"
+                      name="fullname"
+                      placeholder="nama lengkap"
+                      type="text"
+                      error={touched.fullname ? errors.fullname : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.email}
+                      value={values.fullname}
                     />
                   </FormControl>
                   <FormControl>
@@ -155,18 +134,6 @@ export default function Page() {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.password}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <InputText
-                      label="Konfirmasi Password"
-                      name="repass"
-                      placeholder="Konfirmasi Password"
-                      type="password"
-                      error={touched.repass ? errors.repass : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.repass}
                     />
                   </FormControl>
                 </SimpleGrid>

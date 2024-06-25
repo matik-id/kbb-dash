@@ -3,9 +3,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 interface IUser {
     user_id: number;
-    email?: string;
     name: string;
-    role?: string;
+    phone?: string;
 }
 
 type AuthStore = {

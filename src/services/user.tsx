@@ -15,7 +15,7 @@ export interface IData {
 
 export interface IRecord {
     id: number
-    phone: string
+    user: string
     email: string
     name: string
     role: string
@@ -45,7 +45,6 @@ export interface CreateUserPayload {
 }
 
 export interface GetUserPayload {
-    role: string|null;
     q?: string;
 }
 

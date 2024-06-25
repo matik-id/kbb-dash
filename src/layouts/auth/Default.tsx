@@ -21,7 +21,6 @@ function AuthIllustration(props: {
           xl: '100vh',
         }}
         w={{ base: '100vw', md: '100%' }}
-        maxW={{ md: '66%', lg: '1313px' }}
         mx={{ md: 'auto' }}
         pt={{ sm: '50px', md: '0px' }}
         px={{ lg: '30px', xl: '0px' }}
@@ -33,19 +32,15 @@ function AuthIllustration(props: {
         <Box
           display={{ base: 'none', md: 'block' }}
           h="100%"
-          minH="100vh"
-          w={{ lg: '73vw', '2xl': '44vw' }}
+          w="100%"
           position="absolute"
-          right="0px"
         >
           <Flex
             style={{ backgroundImage: `url(${illustrationBackground})` }}
-            justify="center"
-            align="end"
             w="100%"
             h="100%"
             bgSize="cover"
-            bgPosition="top right"
+            bgPosition="top left"
             position="absolute"
             borderBottomLeftRadius={{ lg: '120px', xl: '200px' }}
           />
