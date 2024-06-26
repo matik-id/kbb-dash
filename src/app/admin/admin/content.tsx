@@ -77,6 +77,7 @@ export default function Content() {
           rows={filteredData}
           rowActions={rowActions}
         />
+        
       )}
       {deleteModal.isOpen && activeItem && (
         <ModalDelete
