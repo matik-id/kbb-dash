@@ -4,14 +4,14 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 function App() {
   return (
     <ChakraProvider>
-      <Box bg="gray.800" color="white" py={6} textAlign="center">
+      <Box bg="green" color="white" py={6} textAlign="center">
         <Heading>KBB Dashboard</Heading>
       </Box>
       <Container maxW="container.lg" py={10}>
         <VStack spacing={8}>
           <Box bg="white" p={6} rounded="md" shadow="md" w="full">
-            <Heading size="lg" mb={4}>Tentang KBB</Heading>
-            <Text>KBB (Keluarga Besar Budaya) adalah perkumpulan atau organisasi paguyuban dari berbagai daerah di Indonesia. Aplikasi ini dibuat untuk memudahkan anggota KBB dalam berinteraksi, berbagi informasi, dan menjaga kekayaan budaya Indonesia.</Text>
+            <Heading size="lg" mb={4}>Tentang KBB Super App</Heading>
+            <Text>KBB (Kerukunan Bubuhan Banjar) adalah perkumpulan atau organisasi paguyuban dari berbagai daerah di Indonesia. Aplikasi ini dibuat untuk memudahkan anggota KBB dalam berinteraksi, berbagi informasi, dan menjaga kekayaan budaya Indonesia.</Text>
           </Box>
           <Box bg="white" p={6} rounded="md" shadow="md" w="full">
             <Heading size="lg" mb={4}>Fitur-fitur Aplikasi KBB</Heading>
