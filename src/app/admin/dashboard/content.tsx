@@ -4,7 +4,7 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 function App() {
   return (
     <ChakraProvider>
-      <Box bg="green.666" color="white" py={6} textAlign="center">
+      <Box bg="green" color="white" py={6} textAlign="center">
         <Heading>KBB Dashboard</Heading>
       </Box>
       <Container maxW="container.lg" py={10}>
