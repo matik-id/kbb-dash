@@ -19,6 +19,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { adminService } from "services";
 import * as Yup from "yup";
+import YupPassword from "yup-password";
+YupPassword(Yup);
 
 export default function Page() {
   const toast = useToast({
