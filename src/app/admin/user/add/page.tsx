@@ -8,6 +8,8 @@ import {
   FormControl,
   useToast,
   Button,
+  FormLabel,
+  Select,
 } from "@chakra-ui/react";
 
 // Assets
@@ -55,16 +57,30 @@ export default function Page() {
           <Formik
             enableReinitialize
             initialValues={{
-              name: "",
+              number: "",
+              fullname: "",
               email: "",
               password: "",
               repass: "",
-              eselon1ID: "",
+              phone: "",
+              position: "",
+              pob: "",
+              dob: "",
+              address: "",
+              education: "",
+              profession: "",
+              company: "",
+              gender: "",
+              nik: "",
+              photo: "",
+              file_ktp: "",
+              likes: 0,
+              status: "",
               role: roleParam ? roleParam : "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required("Kolom ini wajib diisi"),
+              fullname: Yup.string().required("Kolom ini wajib diisi"),
               email: Yup.string().required("Kolom ini wajib diisi"),
               password: Yup.string()
                 .max(255)
@@ -124,13 +140,13 @@ export default function Page() {
                   <FormControl>
                     <InputText
                       label="Nama Lengkap"
-                      name="name"
+                      name="fullname"
                       placeholder="Nama"
                       type="text"
-                      error={touched.name ? errors.name : ""}
+                      error={touched.fullname ? errors.fullname : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.name}
+                      value={values.fullname}
                     />
                   </FormControl>
                   <FormControl>
@@ -167,6 +183,149 @@ export default function Page() {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.repass}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Nomor Telepon"
+                      name="phone"
+                      placeholder="Nomor Telepon"
+                      type="phone"
+                      error={touched.phone ? errors.phone : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.phone}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel> Pilih Jenis Kelamin</FormLabel>
+                    <Select
+                      placeholder="Pilih Jenis Kelamin"
+                      value={values.gender}
+                      onChange={(e) => setFieldValue("gender", e.target.value)}
+                    >
+                      <option value="male">Laki-Laki</option>
+                      <option value="female">Perempuan</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Posisi"
+                      name="position"
+                      placeholder="Posisi"
+                      type="text"
+                      error={touched.position ? errors.position : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.position}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Tempat Kelahiran"
+                      name="pob"
+                      placeholder="Tempat Kelahiran"
+                      type="text"
+                      error={touched.pob ? errors.pob : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.pob}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Tanggal Kelahiran"
+                      name="dob"
+                      placeholder="Tanggal Kelahiran"
+                      type="date"
+                      error={touched.dob ? errors.dob : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.dob}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Tempat Tinggal"
+                      name="address"
+                      placeholder="Tempat Tinggal"
+                      type="text"
+                      error={touched.address ? errors.address : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.address}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Pendidikan Terakhir"
+                      name="education"
+                      placeholder="Pendidikan Terakhir"
+                      type="text"
+                      error={touched.education ? errors.education : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.education}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Profesi"
+                      name="profession"
+                      placeholder="Profesi"
+                      type="text"
+                      error={touched.profession ? errors.profession : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.profession}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Perusahaan"
+                      name="company"
+                      placeholder="Perusahaan"
+                      type="text"
+                      error={touched.company ? errors.company : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.company}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="NIK"
+                      name="nik"
+                      placeholder="Perusahaan"
+                      type="text"
+                      error={touched.nik ? errors.nik : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.nik}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="foto"
+                      name="photo"
+                      placeholder="foto"
+                      type="text"
+                      error={touched.photo ? errors.photo : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.photo}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="file ktp"
+                      name="file_ktp"
+                      placeholder="foto"
+                      type="text"
+                      error={touched.file_ktp ? errors.file_ktp : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.file_ktp}
                     />
                   </FormControl>
                 </SimpleGrid>

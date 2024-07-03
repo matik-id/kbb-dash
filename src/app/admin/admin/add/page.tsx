@@ -63,6 +63,18 @@ export default function Page() {
             validationSchema={Yup.object().shape({
               fullname: Yup.string().required("Kolom ini wajib diisi"),
               password: Yup.string()
+                .max(255)
+                .min(8)
+                .minLowercase(
+                  1,
+                  "password must contain at least 1 lower case letter"
+                )
+                .minUppercase(
+                  1,
+                  "password must contain at least 1 upper case letter"
+                )
+                .minNumbers(1, "password must contain at least 1 number")
+                .required("Kolom ini wajib diisi"),
             })}
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {

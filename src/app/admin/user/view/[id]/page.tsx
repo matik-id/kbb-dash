@@ -42,7 +42,7 @@ export default function Page({ params }: { params: { id: string } }) {
     <>
       <Box
         mx="auto"
-        p={{ base: "20px", md: "30px" }}
+        p= {{ base: "20px", md: "30px" }}
         pe="20px"
         minH="100vh"
         pt="50px"
@@ -54,19 +54,29 @@ export default function Page({ params }: { params: { id: string } }) {
             fontSize="2xl"
             mb="4px"
           >
-            Detail Pengguna
+            Detail Anggota
           </Text>
           <hr />
           <SimpleGrid columns={2} gap="20px" mt={"20px"}>
             <Information
               boxShadow={cardShadow}
-              title="Nama"
-              value={data && data.name}
+              title="Nama Lengkap"
+              value={data && data.fullname}
             />
             <Information
               boxShadow={cardShadow}
               title="Email"
               value={data && data.email}
+            />
+             <Information
+              boxShadow={cardShadow}
+              title="No Telp"
+              value={data && data.phone}
+            />
+            <Information
+              boxShadow={cardShadow}
+              title="Jenis Kelamin"
+              value={data && data.gender}
             />
           </SimpleGrid>
         </Card>

@@ -7,23 +7,20 @@ import { getActiveNavbar, getActiveNavbarText } from "utils/navigation";
 import {routes} from "routes";
 import { Suspense, useState } from "react";
 import Content from "./content";
-import { useSearchParams } from "next/navigation";
 
 export default function Default() {
   const { onOpen } = useDisclosure();
   const [fixed] = useState(false);
-  const searchParams = useSearchParams();
-  const roleParam = searchParams.get("role");
   
   return (
     <>
       <Portal>
         <Box>
           <Navbar
-            urlAddButton={"/admin/user/add?role=" + roleParam}
+            urlAddButton={"/post/article/add"}
             onOpen={onOpen}
             logoText={"Matik Creative Technology"}
-            brandText="Anggota"
+            brandText="Atikel"
             secondary={getActiveNavbar(routes)}
             message={getActiveNavbarText(routes)}
             fixed={fixed}

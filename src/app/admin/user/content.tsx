@@ -14,6 +14,7 @@ import ModalReset from "./modalRpw";
 const fecthData = async (role: string | null, q?: string) => {
   try {
     const response = await userService.getUsers({
+      sort_by: "+id",
       q,
     });
 
@@ -49,14 +50,13 @@ export default function Content() {
   let filteredData: any[] = [];
 
   if (isSuccess && data)
-    filteredData = data.data.filter(
-      (v) =>
+    filteredData = data.data.records.filter((v) =>
         v.email.toLowerCase().includes(search.toLowerCase()) ||
-        v.name.toLowerCase().includes(search.toLowerCase())
+        v.fullname.toLowerCase().includes(search.toLowerCase())
     );
 
   const handleRowClick = (v: any) => {
-    router.push("/admin/user/view/" + v.ID);
+      router.push("/admin/user/view/" + v.id);
   };
   const handleEdit = (v: any) => {
     router.push("/admin/user/edit/" + v.ID + "?role=" + v.role);
@@ -77,8 +77,10 @@ export default function Content() {
 
   columns = [
     { name: "email", label: "Email" },
-    { name: "name", label: "Nama Lengkap" },
-    { name: "role", label: "Role" },
+    { name: "fullname", label: "Nama Lengkap" },
+    { name: "phone", label: "Nomor Telepon" },
+    { name: "gender", label: "Jenis Kelamin" },
+
   ]
 
   if (roleParam === "satker") {
@@ -101,7 +103,7 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Pengguna (" + roleParam + ")"}
+          title={"List Anggota"}
           onRowClick={handleRowClick}
           navigateRow={navigateRow}
           primaryKey="id"

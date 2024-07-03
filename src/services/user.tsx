@@ -9,16 +9,29 @@ export interface IRoot {
 }
 
 export interface IData {
-    records: IRecord[]
-  metadata: Metadata
+    records: IRecord[];
+    metadata: Metadata;
 }
 
 export interface IRecord {
     id: number
-    user: string
+    number: string
     email: string
-    name: string
-    role: string
+    password: string
+    fullname: string
+    phone: string
+    gender: string
+    position: string
+    pob: string
+    dob: string
+    address: string
+    education: string
+    profession: string
+    company: string
+    nik: string
+    photo: string
+    file_ktp: string
+    likes: number
     is_active: boolean
     created_at: string
     updated_at: string
@@ -39,12 +52,26 @@ export interface UpdateUserPayload extends CreateUserPayload {
 export interface CreateUserPayload {
     email: string;
     password?: string;
-    name: string;
-    role: string;
+    number: string
+    fullname: string
+    phone: string
+    gender: string
+    position: string
+    pob: string
+    dob: string
+    address: string
+    education: string
+    profession: string
+    company: string
+    nik: string
+    photo: string
+    file_ktp: string
+    likes: number
     is_active?: boolean;
 }
 
 export interface GetUserPayload {
+    sort_by: string;
     q?: string;
 }
 
@@ -53,7 +80,7 @@ export interface CreateUserResponse extends BaseResponse {
 }
 
 export interface GetUsersResponse {
-    data: IRecord[];
+    data: IData;
 }
 export interface GetUserResponse extends BaseResponse {
     data: IRecord;
@@ -84,7 +111,7 @@ export const updateUser = async ({ id, ...payload }: UpdateUserPayload) => {
 }
 
 export const getUsers = async (payload: GetUserPayload): Promise<GetUsersResponse> => {
-    const response = await instance.get('/users', { params: payload });
+    const response = await instance.get('/user', { params: payload });
     return response.data;
 };
 
