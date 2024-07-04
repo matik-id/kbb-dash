@@ -10,6 +10,9 @@ import {
   Button,
   FormLabel,
   Select,
+  Input,
+  Spinner,
+  Image,
 } from "@chakra-ui/react";
 
 // Assets
@@ -17,6 +20,8 @@ import InputText from "components/Form/InputText";
 import { Formik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 import { userService } from "services";
+import { instance } from "services/instances";
+import { useState } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 YupPassword(Yup);
@@ -29,6 +34,29 @@ export default function Page() {
   });
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const router = useRouter();
+  const [isLoadingPhoto, setIsLoadingPhoto] = useState(false);
+  const [photo, setPhoto] = useState("");
+  
+  const onImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    let img = e.target.files && e.target.files[0];
+    if (!img) {
+      return;
+    }
+
+    try {
+      setIsLoadingPhoto(true);
+      const body = new FormData();
+      body.append("file", img);
+      const result = await instance.post("/upload/storage", body, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      setPhoto(result.data.data.filename);
+      setIsLoadingPhoto(false);
+    } catch (error) {}
+  };
+
 
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
@@ -104,6 +132,7 @@ export default function Page() {
               try {
                 setStatus({ success: true });
                 setSubmitting(false);
+                values.photo = photo;
                 await userService.createUser(values);
                 toast({
                   status: "success",
@@ -296,7 +325,7 @@ export default function Page() {
                     <InputText
                       label="NIK"
                       name="nik"
-                      placeholder="Perusahaan"
+                      placeholder="NIK"
                       type="text"
                       error={touched.nik ? errors.nik : ""}
                       onBlur={handleBlur}
@@ -305,16 +334,24 @@ export default function Page() {
                     />
                   </FormControl>
                   <FormControl>
-                    <InputText
-                      label="foto"
-                      name="photo"
-                      placeholder="foto"
-                      type="text"
-                      error={touched.photo ? errors.photo : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.photo}
+                    <FormLabel>Gambar</FormLabel>
+                    <Input
+                      accept="application/pdf image/*"
+                      type="file"
+                      onChange={onImageChange}
                     />
+                    {isLoadingPhoto === true && (
+                      <>
+                        <Spinner />
+                        <Text>Loading Upload Gambar...</Text>
+                      </>
+                    )}
+                    {isLoadingPhoto === false && photo && (
+                      <Image src={photo} maxH="200px" alt="detail img" />
+                    )}
+                    {values.photo && (
+                      <Image src={values.photo} maxH="200px" alt="detail img" />
+                    )}
                   </FormControl>
                   <FormControl>
                     <InputText

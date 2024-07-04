@@ -39,9 +39,6 @@ export interface UpdatePostPayload extends CreatePostPayload {
 }
 
 export interface CreatePostPayload {
-  fullname: string;
-  username: string;
-  password?: string;
   title: string;
   image: string;
   content: string;
