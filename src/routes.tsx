@@ -31,7 +31,7 @@ export const routes: Array<IRoute> = [
   {
     name: 'Admin',
     layout: '/admin',
-    path: '/admin',
+    path: '/operator',
     icon: FaUserCircle,
   },
   {

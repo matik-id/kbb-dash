@@ -28,7 +28,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
 
   //   Chakra color mode
   const pathname = usePathname();
-
   let activeColor = useColorModeValue("gray.700", "white");
   let inactiveColor = useColorModeValue(
     "secondaryGray.600",

@@ -1,19 +1,16 @@
 // Chakra imports
-import { Flex, useColorModeValue, Text } from '@chakra-ui/react';
+import { Flex, useColorModeValue, Text, Image } from '@chakra-ui/react';
 
 // Custom components
 import { HSeparator } from 'components/separator/Separator';
-import { useAuthStore } from 'store';
 
 export function SidebarBrand() {
 	//   Chakra color mode
 	let logoColor = useColorModeValue('navy.700', 'white');
 
-	const auth = useAuthStore();
-	
 	return (
-		<Flex alignItems='center' flexDirection='column'>
-			<Text fontSize='3xl' fontWeight='bold'mb={'20px'} color={logoColor}></Text>
+		<Flex flexDirection='column'>
+			<Image src={process.env.NEXT_PUBLIC_BASE_PATH + '/img/logo-kbb.png'} ml='20px' w='200px'/>
 			<HSeparator mb='20px' />
 		</Flex>
 	);
