@@ -17,7 +17,7 @@ export default function Default() {
       <Portal>
         <Box>
           <Navbar
-            urlAddButton={"/admin/admin/add"}
+            urlAddButton={"/admin/operator/add"}
             onOpen={onOpen}
             logoText={"Matik Creative Technology"}
             brandText="Admin"

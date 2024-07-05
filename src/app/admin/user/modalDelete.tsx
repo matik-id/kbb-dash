@@ -21,7 +21,6 @@ interface ModalDeleteProps {
 
 const ModalDelete = ({ isOpen, onClose, activeItem }: ModalDeleteProps) => {
   const initialRef = React.useRef(null);
-
   const toast = useToast({
     position: "top",
     variant: "subtle",
@@ -39,7 +38,7 @@ const ModalDelete = ({ isOpen, onClose, activeItem }: ModalDeleteProps) => {
     }
 
     try { 
-      const response = await instance.delete(`/admin/${activeItem.id}`);
+      const response = await instance.delete(`/user/${activeItem.id}`);
 
       if (response.status === 200) {
         onClose(); // Close the modal on successful deletion

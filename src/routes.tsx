@@ -29,12 +29,6 @@ export const routes: Array<IRoute> = [
     icon: MdHome,
   },
   {
-    name: 'Admin',
-    layout: '/admin',
-    path: '/operator',
-    icon: FaUserCircle,
-  },
-  {
     name: 'Anggota',
     layout: '/admin',
     path: '/user',
@@ -45,6 +39,12 @@ export const routes: Array<IRoute> = [
     layout: '/admin',
     path: '/article',
     icon: MdArticle,
+  },
+  {
+    name: 'Admin',
+    layout: '/admin',
+    path: '/operator',
+    icon: FaUserCircle,
   },
 
 ];

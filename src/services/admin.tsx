@@ -56,6 +56,11 @@ export interface GetAdminsResponse {
   path: string
 }
 
+export interface ResetPasswordAdminPayload {
+    admin: string;
+    password: string;
+}
+
 
 export interface GetAdminResponse extends BaseResponse {
   data: IRecord;
@@ -107,3 +112,8 @@ export const deleteAdmin = async (
   const response = await instance.delete(`${url}/${id}`);
   return response.data;
 };
+
+export const resetPassAdmin = async (payload : ResetPasswordAdminPayload) => {
+  const response = await instance.post(`${url+"/"+payload.admin}/rpw`, payload);
+  return response.data;
+}

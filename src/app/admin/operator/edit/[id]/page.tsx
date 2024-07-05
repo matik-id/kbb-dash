@@ -72,11 +72,11 @@ export default function Page({ params }: { params: { id: string } }) {
               id: Number(params.id) || 0,
               fullname: data?.fullname || "",
               username: data?.username || "",
-              position: data?.position || "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required("Kolom ini wajib diisi"),
+              username: Yup.string().required("Kolom ini wajib diisi"),
+              fullname: Yup.string().required("Kolom ini wajib diisi"),
             })}
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {
@@ -88,7 +88,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   title: "Edit data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/admin");
+                router.push("/admin/operator");
               } catch (error: any) {
                 toast({
                   status: "error",
@@ -113,12 +113,12 @@ export default function Page({ params }: { params: { id: string } }) {
               handleChange,
             }) => (
               <form onSubmit={handleSubmit}>
-                <SimpleGrid columns={3} gap="20px" mt={"20px"}>
+                <SimpleGrid columns={2} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="username"
+                      label="Username (Digunakan untuk Login)"
                       name="usernname"
-                      placeholder="username"
+                      placeholder="Masukkan Username"
                       type="text"
                       error={touched.username ? errors.username : ""}
                       onBlur={handleBlur}
@@ -128,26 +128,14 @@ export default function Page({ params }: { params: { id: string } }) {
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="fullname"
+                      label="Nama Lengkap"
                       name="fullname"
-                      placeholder="fullname"
+                      placeholder="Masukkan Nama Lengkap"
                       type="text"
                       error={touched.fullname ? errors.fullname : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.fullname}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <InputText
-                      label="Jabatan"
-                      name="position"
-                      placeholder="Jabatan Pejabat"
-                      type="text"
-                      error={touched.position ? errors.position : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.position}
                     />
                   </FormControl>
                 </SimpleGrid>
