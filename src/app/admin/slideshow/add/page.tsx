@@ -157,10 +157,11 @@ export default function Page() {
                       value={values.image}
                     />
                   </FormControl>
-                  <FormControl mt={"20px"}>
+                  <br></br>
+                  <FormControl>
                   <FormLabel>Konten</FormLabel>
                   <DefaultEditor
-                    style={{ height: "500px" }}
+                    style={{ height: "250px" }}
                     name="content"
                     onBlur={handleBlur}
                     onChange={handleChange}

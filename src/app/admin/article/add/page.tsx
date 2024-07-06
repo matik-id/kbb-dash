@@ -135,7 +135,7 @@ export default function Page() {
                 <SimpleGrid columns={3} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="judul"
+                      label="Judul"
                       name="title"
                       placeholder="Judul"
                       type="title"
@@ -147,9 +147,9 @@ export default function Page() {
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="gambar"
+                      label="Gambar"
                       name="image"
-                      placeholder="gambar"
+                      placeholder="Gambar"
                       type="text"
                       error={touched.image ? errors.image : ""}
                       onBlur={handleBlur}
@@ -157,17 +157,17 @@ export default function Page() {
                       value={values.image}
                     />
                   </FormControl>
-                  <FormControl mt={"20px"}>
+                  <br></br>
+                  <FormControl>
                   <FormLabel>Konten</FormLabel>
                   <DefaultEditor
-                    style={{ height: "500px" }}
+                    style={{ height: "250px" }}
                     name="content"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.content}
                   />
-                </FormControl>            
-            
+                </FormControl>                      
                   <FormControl>
                     <InputText
                       label="date start"
