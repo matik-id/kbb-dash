@@ -158,6 +158,7 @@ export default function Page() {
                     />
                   </FormControl>
                   <FormControl mt={"20px"}>
+                  <FormLabel>Konten</FormLabel>
                   <DefaultEditor
                     style={{ height: "500px" }}
                     name="content"
