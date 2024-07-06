@@ -1,10 +1,8 @@
 import { IconType } from 'react-icons';
 import {
   MdHome,
-  MdPeople,
 } from 'react-icons/md';
-import { FaBookBookmark, FaBookOpenReader, FaChalkboardUser, FaCircleDollarToSlot, FaDollarSign, FaFileShield, FaHandHoldingHand, FaHandshake, FaImages, FaMoneyBillTransfer, FaMoneyCheckDollar, FaNewspaper, FaUser, FaUserTie } from "react-icons/fa6";
-import { GiMoneyStack } from "react-icons/gi";
+import { FaUmbrellaBeach } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { MdArticle } from "react-icons/md";
@@ -46,6 +44,12 @@ export const routes: Array<IRoute> = [
     layout: '/admin',
     path: '/article',
     icon: MdArticle,
+  },
+  {
+    name: 'Destinasi Wisata',
+    layout: '/admin',
+    path: '/destination',
+    icon: FaUmbrellaBeach,
   },
   {
     name: 'Slideshow',
