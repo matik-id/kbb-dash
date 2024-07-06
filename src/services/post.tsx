@@ -50,6 +50,7 @@ export interface CreatePostPayload {
 }
 
 export interface GetPostPayload {
+  type: string;
 sort_by: string;
 }
 

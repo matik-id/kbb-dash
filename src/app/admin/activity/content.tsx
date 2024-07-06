@@ -13,6 +13,7 @@ import ModalDelete from "./modalDelete";
 const fecthData = async (q?: string) => {
   try {
     const response = await postService.getPosts({
+      type: "activity",
       sort_by: "+id"
     });
 
