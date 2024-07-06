@@ -17,10 +17,10 @@ export default function Default() {
       <Portal>
         <Box>
           <Navbar
-            urlAddButton={"/admin/operator/add"}
+            urlAddButton={"/admin/activity/add"}
             onOpen={onOpen}
             logoText={"Matik Creative Technology"}
-            brandText="Admin"
+            brandText="Aktivitas"
             secondary={getActiveNavbar(routes)}
             message={getActiveNavbarText(routes)}
             fixed={fixed}

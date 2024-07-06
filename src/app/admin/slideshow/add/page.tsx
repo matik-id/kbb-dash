@@ -78,7 +78,7 @@ export default function Page() {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Artikel
+            Tambah Slideshow
           </Text>
           <hr />
           <Formik
@@ -90,7 +90,7 @@ export default function Page() {
               type: "",
               date_start: "",
               date_end: "",
-              is_publish: true,            
+              is_publish: true,  
               submit: null,
             }}
             validationSchema={Yup.object().shape({
@@ -99,15 +99,15 @@ export default function Page() {
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {
                 setStatus({ success: true });
-                setSubmitting(false); 
-                values.type = "article";             
+                setSubmitting(false);
+                values.type = "slideshow"; 
                 await postService.createPost(values);
                 toast({
                   status: "success",
                   title: "Tambah data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/article");
+                router.push("/admin/slideshow");
               } catch (error: any) {
                 toast({
                   status: "error",
@@ -165,8 +165,7 @@ export default function Page() {
                     onChange={handleChange}
                     value={values.content}
                   />
-                </FormControl>            
-            
+                </FormControl>        
                   <FormControl>
                     <InputText
                       label="date start"

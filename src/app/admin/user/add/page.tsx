@@ -334,24 +334,16 @@ export default function Page() {
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Gambar</FormLabel>
-                    <Input
-                      accept="application/pdf image/*"
-                      type="file"
-                      onChange={onImageChange}
+                    <InputText
+                      label="gambar"
+                      name="photo"
+                      placeholder="gambar"
+                      type="text"
+                      error={touched.photo ? errors.photo : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.photo}
                     />
-                    {isLoadingPhoto === true && (
-                      <>
-                        <Spinner />
-                        <Text>Loading Upload Gambar...</Text>
-                      </>
-                    )}
-                    {isLoadingPhoto === false && photo && (
-                      <Image src={photo} maxH="200px" alt="detail img" />
-                    )}
-                    {values.photo && (
-                      <Image src={values.photo} maxH="200px" alt="detail img" />
-                    )}
                   </FormControl>
                   <FormControl>
                     <InputText

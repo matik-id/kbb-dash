@@ -21,7 +21,7 @@ export interface IRecord {
   type: string;
   date_start: string;
   date_end: string;
-  is_publish: string;
+  is_publish: boolean;
   created_at: string;
   updated_at: string;
   deleted_at: any;
@@ -45,13 +45,12 @@ export interface CreatePostPayload {
   type: string;
   date_start: string;
   date_end: string;
-  is_publish: string;
+  is_publish: boolean;
 
 }
 
 export interface GetPostPayload {
 sort_by: string;
-  q?: string;
 }
 
 export interface CreatePostResponse extends BaseResponse {

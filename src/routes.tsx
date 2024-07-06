@@ -8,7 +8,8 @@ import { GiMoneyStack } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { MdArticle } from "react-icons/md";
-
+import { RiSlideshow3Fill } from "react-icons/ri";
+import { MdLocalActivity } from "react-icons/md";
 
 
 export interface IRoute {
@@ -46,5 +47,16 @@ export const routes: Array<IRoute> = [
     path: '/article',
     icon: MdArticle,
   },
-
+  {
+    name: 'slideshow',
+    layout: '/admin',
+    path: '/slideshow',
+    icon: RiSlideshow3Fill,
+  },
+  {
+    name: 'aktivitas',
+    layout: '/admin',
+    path: '/activity',
+    icon: MdLocalActivity,
+  },
 ];

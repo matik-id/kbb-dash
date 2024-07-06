@@ -14,7 +14,6 @@ const fecthData = async (q?: string) => {
   try {
     const response = await postService.getPosts({
       sort_by: "+id",
-      q,
     });
 
     return response;
@@ -43,7 +42,7 @@ export default function Content() {
     );
 
   const handleEdit = (v: any) => {
-    router.push("/post/post/edit/" + v.ID);
+    router.push("/admin/article/edit/" + v.ID);
   };
 
   const handleDelete = (v: any) => {
@@ -73,7 +72,7 @@ export default function Content() {
         <DataTable
           title={"List "}
           primaryKey="id"
-          columns={[{ name: "username", label: "username" }, {name:"fullname", label:"Nama Lengkap"}]}
+          columns={[{ name: "title", label: "Judul" }]}
           rows={filteredData}
           rowActions={rowActions}
         />

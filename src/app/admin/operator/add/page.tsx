@@ -88,7 +88,7 @@ export default function Page() {
                   title: "Tambah data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/admin");
+                router.push("/admin/operator");
               } catch (error: any) {
                 toast({
                   status: "error",

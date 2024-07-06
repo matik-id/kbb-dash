@@ -7,14 +7,13 @@ import useDebounce from "hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
-import { adminService } from "services";
+import { postService } from "services";
 import ModalDelete from "./modalDelete";
 
 const fecthData = async (q?: string) => {
   try {
-    const response = await adminService.getAdmins({
+    const response = await postService.getPosts({
       sort_by: "+id",
-      q,
     });
 
     return response;
@@ -31,7 +30,7 @@ export default function Content() {
   const [activeItem, setActiveItem] = useState<any>(null);
 
   const { data, isLoading, isSuccess, refetch } = useQuery({
-    queryKey: ["admins", debouncedSearch],
+    queryKey: ["posts", debouncedSearch],
     queryFn: () => fecthData(debouncedSearch),
   });
 
@@ -39,11 +38,11 @@ export default function Content() {
 
   if (isSuccess && data)
     filteredData = data.data.records.filter((v) =>
-      v.fullname.toLowerCase().includes(search.toLowerCase())
+      v.title.toLowerCase().includes(search.toLowerCase())
     );
 
   const handleEdit = (v: any) => {
-    router.push("/admin/operator/edit/" + v.id);
+    router.push("/admin/post/edit/" + v.ID);
   };
 
   const handleDelete = (v: any) => {
@@ -73,7 +72,7 @@ export default function Content() {
         <DataTable
           title={"List "}
           primaryKey="id"
-          columns={[{ name: "username", label: "username" }, {name:"fullname", label:"Nama Lengkap"}]}
+          columns={[{ name: "title", label: "judul" }]}
           rows={filteredData}
           rowActions={rowActions}
         />
