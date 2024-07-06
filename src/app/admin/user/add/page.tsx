@@ -57,9 +57,6 @@ export default function Page() {
     } catch (error) {}
   };
 
-
-  const searchParams = useSearchParams();
-  const roleParam = searchParams.get("role");
   return (
     <>
       <Box
@@ -79,7 +76,7 @@ export default function Page() {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Pengguna ({roleParam})
+            Tambah Anggota
           </Text>
           <hr />
           <Formik
@@ -104,7 +101,6 @@ export default function Page() {
               file_ktp: "",
               likes: 0,
               status: "",
-              role: roleParam ? roleParam : "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
@@ -139,7 +135,7 @@ export default function Page() {
                   title: mode + " data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/user?role=" + roleParam);
+                router.push("/admin/user");
               } catch (error: any) {
                 toast({
                   status: "error",

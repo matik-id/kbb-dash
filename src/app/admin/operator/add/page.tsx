@@ -60,10 +60,17 @@ export default function Page() {
               username: "",
               fullname: "",
               password: "",
+              repass: "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
-              fullname: Yup.string().required("Kolom ini wajib diisi"),
+              username: Yup.string()
+                .required("Kolom ini wajib diisi")
+                .trim()
+                .matches(
+                  /^[a-zA-Z0-9_]+(?:-[a-zA-Z0-9_]+)*$/,
+                  "Username tidak valid, tidak boleh spasi dan karakter yang tidak diizinkan"
+                ),
               password: Yup.string()
                 .max(255)
                 .min(8)
@@ -77,6 +84,9 @@ export default function Page() {
                 )
                 .minNumbers(1, "password must contain at least 1 number")
                 .required("Kolom ini wajib diisi"),
+              repass: Yup.string()
+                .oneOf([Yup.ref("password"), ""], "Password tidak cocok")
+                .required("Konfirmasi password wajib diisi"),
             })}
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {
@@ -113,10 +123,10 @@ export default function Page() {
               handleChange,
             }) => (
               <form onSubmit={handleSubmit}>
-                <SimpleGrid columns={3} gap="20px" mt={"20px"}>
+                <SimpleGrid columns={2} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="username"
+                      label="Username (Digunakan untuk Login)"
                       name="username"
                       placeholder="Isi username"
                       type="text"
@@ -128,9 +138,9 @@ export default function Page() {
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="fullname"
+                      label="Nama Lengkap"
                       name="fullname"
-                      placeholder="nama lengkap"
+                      placeholder="Masukkan Nama Lengkap"
                       type="text"
                       error={touched.fullname ? errors.fullname : ""}
                       onBlur={handleBlur}
@@ -148,6 +158,18 @@ export default function Page() {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.password}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputText
+                      label="Konfirmasi Password"
+                      name="repass"
+                      placeholder="Konfirmasi Password"
+                      type="password"
+                      error={touched.repass ? errors.repass : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.repass}
                     />
                   </FormControl>
                 </SimpleGrid>

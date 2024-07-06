@@ -32,7 +32,9 @@ const RowActions = ({
               icon,
               onClick,
               label,
-              variant = "white",
+              size = "sm",
+              variant = "solid",
+              colorScheme = "gray",
               hideOnNotUser,
               // @ts-ignore
               isHidden = (value: any) => false,
@@ -40,39 +42,13 @@ const RowActions = ({
             i
           ) => (
             <Fragment key={i}>
-              {value && value.status === "assigned" && hideOnNotUser ? (
-                <>
-                  {hideOnNotUser === value.courierId && (
-                    <>
-                      <Button
-                        leftIcon={<Icon as={icon} w={4} h={4} ml={-0.5} />}
-                        variant={variant}
-                        display={{ base: "none", md: "flex" }}
-                        onClick={() => onClick(value)}
-                        boxShadow='md'
-                      >
-                        {label}
-                      </Button>
-                      <IconButton
-                        aria-label={label}
-                        icon={<Icon as={icon} w={4} h={4} />}
-                        rounded="full"
-                        variant={variant}
-                        display={{ base: "flex", md: "none" }}
-                        onClick={() => onClick(value)}
-                        boxShadow='md'
-                      />
-                    </>
-                  )}
-                </>
-              ) : (
-                <>
                   {!isHidden(value) && (
                     <>
                       <Button
                         leftIcon={<Icon as={icon} w={4} h={4} ml={-0.5} />}
+                        size={size}
                         variant={variant}
-                        bgColor={"white"}
+                        colorScheme={colorScheme}
                         display={{ base: "none", md: "flex" }}
                         onClick={() => onClick(value)}
                         boxShadow='base'
@@ -90,8 +66,6 @@ const RowActions = ({
                       />
                     </>
                   )}
-                </>
-              )}
             </Fragment>
           )
         )}

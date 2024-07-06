@@ -9,11 +9,13 @@ import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { adminService } from "services";
 import ModalDelete from "./modalDelete";
+import { HiLockOpen } from "react-icons/hi";
+import ModalReset from "./modalRpw";
 
 const fecthData = async (q?: string) => {
   try {
     const response = await adminService.getAdmins({
-      sort_by: "+id",
+      sort_by: "-updated_at",
       q,
     });
 
@@ -29,7 +31,16 @@ export default function Content() {
   const debouncedSearch = useDebounce(search, 400);
   const deleteModal = useDisclosure();
   const [activeItem, setActiveItem] = useState<any>(null);
+  const resetPassUser = useDisclosure();
 
+  const handleResetOpen = (data: any) => {
+    resetPassUser.onOpen();
+    setActiveItem(data);
+  };
+
+  const handleResetClose = () => {
+    resetPassUser.onClose();
+  };
   const { data, isLoading, isSuccess, refetch } = useQuery({
     queryKey: ["admins", debouncedSearch],
     queryFn: () => fecthData(debouncedSearch),
@@ -57,8 +68,14 @@ export default function Content() {
   };
 
   let rowActions: any = [
-    { icon: FiEdit, label: "Edit", onClick: handleEdit, variant: "white" },
-    { icon: FiTrash, label: "Hapus", onClick: handleDelete, variant: "white" },
+    {
+      icon: HiLockOpen,
+      label: "Reset Password",
+      onClick: (data: any) => handleResetOpen(data),
+      colorScheme: "teal",
+    },
+    { icon: FiEdit, label: "Edit", onClick: handleEdit, colorScheme: "orange" },
+    { icon: FiTrash, label: "Hapus", onClick: handleDelete, colorScheme: "red" },
   ];
 
   return (
@@ -71,9 +88,9 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List "}
+          title={"List"}
           primaryKey="id"
-          columns={[{ name: "username", label: "username" }, {name:"fullname", label:"Nama Lengkap"}]}
+          columns={[{ name: "username", label: "Username" }, {name:"fullname", label:"Nama Lengkap"}]}
           rows={filteredData}
           rowActions={rowActions}
         />
@@ -84,6 +101,13 @@ export default function Content() {
           activeItem={activeItem}
           isOpen={deleteModal.isOpen}
           onClose={handleDeleteClose}
+        />
+      )}
+      {resetPassUser.isOpen && activeItem && (
+        <ModalReset
+          activeItem={activeItem}
+          isOpen={resetPassUser.isOpen}
+          onClose={handleResetClose}
         />
       )}
     </Box>

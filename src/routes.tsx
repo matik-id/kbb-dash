@@ -3,7 +3,7 @@ import {
   MdHome,
   MdPeople,
 } from 'react-icons/md';
-import { FaBookBookmark, FaBookOpenReader, FaChalkboardUser, FaCircleDollarToSlot, FaDollarSign, FaFileShield, FaHandHoldingHand, FaHandshake, FaImages, FaMoneyBillTransfer, FaMoneyCheckDollar, FaNewspaper, FaUserTie } from "react-icons/fa6";
+import { FaBookBookmark, FaBookOpenReader, FaChalkboardUser, FaCircleDollarToSlot, FaDollarSign, FaFileShield, FaHandHoldingHand, FaHandshake, FaImages, FaMoneyBillTransfer, FaMoneyCheckDollar, FaNewspaper, FaUser, FaUserTie } from "react-icons/fa6";
 import { GiMoneyStack } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
@@ -48,13 +48,13 @@ export const routes: Array<IRoute> = [
     icon: MdArticle,
   },
   {
-    name: 'slideshow',
+    name: 'Slideshow',
     layout: '/admin',
     path: '/slideshow',
     icon: RiSlideshow3Fill,
   },
   {
-    name: 'aktivitas',
+    name: 'Aktivitas',
     layout: '/admin',
     path: '/activity',
     icon: MdLocalActivity,
