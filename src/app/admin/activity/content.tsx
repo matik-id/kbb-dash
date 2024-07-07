@@ -71,7 +71,7 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List "}
+          title={"List Aktivitas "}
           primaryKey="id"
           columns={[{ name: "title", label: "Judul" }]}
           rows={filteredData}

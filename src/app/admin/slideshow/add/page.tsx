@@ -25,6 +25,7 @@ import * as Yup from "yup";
 import { instance } from "services/instances";
 import YupPassword from "yup-password";
 import DefaultEditor from "react-simple-wysiwyg";
+import UploadImage from "components/UploadImage";
 YupPassword(Yup);
 
 export default function Page() {
@@ -130,12 +131,13 @@ export default function Page() {
               errors,
               handleBlur,
               handleChange,
+              setFieldValue,
             }) => (
               <form onSubmit={handleSubmit}>
-                <SimpleGrid columns={3} gap="20px" mt={"20px"}>
+                <SimpleGrid columns={1} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="judul"
+                      label="Judul"
                       name="title"
                       placeholder="Judul"
                       type="title"
@@ -145,19 +147,12 @@ export default function Page() {
                       value={values.title}
                     />
                   </FormControl>
-                  <FormControl>
-                    <InputText
-                      label="gambar"
-                      name="image"
-                      placeholder="gambar"
-                      type="text"
-                      error={touched.image ? errors.image : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.image}
-                    />
-                  </FormControl>
-                  <br></br>
+                  <UploadImage
+                    name="image"
+                    label="Gambar"
+                    value={values.image}
+                    onChange={(e) => setFieldValue("image", e)}
+                  /> 
                   <FormControl>
                   <FormLabel>Konten</FormLabel>
                   <DefaultEditor
