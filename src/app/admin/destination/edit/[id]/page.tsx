@@ -21,8 +21,9 @@ import * as Yup from "yup";
 import DefaultEditor from "react-simple-wysiwyg";
 import { destinationService } from "services";
 import UploadImage from "components/UploadImage";
+import { useEffect, useState } from "react";
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   const toast = useToast({
     position: "top",
     variant: "subtle",
@@ -30,6 +31,21 @@ export default function Page() {
   });
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    if (!loading) return;
+    destinationService.getDestination(params.id)
+      .then((res: any) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [loading, params.id]);
 
   return (
     <>
@@ -50,23 +66,23 @@ export default function Page() {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Destinasi Wisata
+            Edit Destinasi Wisata
           </Text>
           <hr />
           <Formik
             enableReinitialize
             initialValues={{
-              name: "",
-              category: "",
-              coordinate: "",
-              thumbnail: "",
-              image1: "",
-              image2: "",
-              image3: "",
-              video: "",
-              address: "",
-              content: "",
-              is_publish: true,
+              id: Number(params.id) || 0,
+              name: data?.name || "",
+              category: data?.category || "",
+              coordinate: data?.coordinate || "",
+              thumbnail: data?.thumbnail || "",
+              image1: data?.image1 || "",
+              image2: data?.image2 || "",
+              image3: data?.image3 || "",
+              video: data?.video || "",
+              address: data?.address || "",
+              content: data?.content || "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
@@ -76,7 +92,7 @@ export default function Page() {
               try {
                 setStatus({ success: true });
                 setSubmitting(false);
-                await destinationService.createDestination(values);
+                await destinationService.updateDestination(values);
                 toast({
                   status: "success",
                   title: "Tambah data berhasil",

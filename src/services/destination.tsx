@@ -53,7 +53,7 @@ export interface CreateDestinationPayload {
   video: string;
   address: string;
   content: string;
-  is_publish: boolean;
+  is_publish?: boolean;
 
 }
 

@@ -42,7 +42,7 @@ export default function Content() {
     );
 
   const handleEdit = (v: any) => {
-    router.push("/admin/destination/edit/" + v.ID);
+    router.push("/admin/destination/edit/" + v.id);
   };
 
   const handleDelete = (v: any) => {

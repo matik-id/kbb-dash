@@ -8,7 +8,6 @@ import {
   FormControl,
   useToast,
   Button,
-  Checkbox,
 } from "@chakra-ui/react";
 
 // Assets
@@ -63,7 +62,7 @@ export default function Page({ params }: { params: { id: string } }) {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Pejabat
+            Tambah Administrator
           </Text>
           <hr />
           <Formik

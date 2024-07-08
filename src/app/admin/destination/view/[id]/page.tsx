@@ -18,7 +18,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { destinationService } from "services";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdOutlineOpenInNew } from "react-icons/md";
 
 const fecthDetail = async (id: string | string[] | undefined) => {
