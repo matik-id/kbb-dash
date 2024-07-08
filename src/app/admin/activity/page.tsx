@@ -20,7 +20,7 @@ export default function Default() {
             urlAddButton={"/admin/activity/add"}
             onOpen={onOpen}
             logoText={"Matik Creative Technology"}
-            brandText="Aktivitas"
+            brandText="Kegiatan"
             secondary={getActiveNavbar(routes)}
             message={getActiveNavbarText(routes)}
             fixed={fixed}

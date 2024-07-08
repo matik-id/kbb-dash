@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { postService } from "services";
 import ModalDelete from "./modalDelete";
+import dayjs from "dayjs";
 
 const fecthData = async (q?: string) => {
   try {
@@ -71,9 +72,9 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Aktivitas "}
+          title={"List Kegiatan"}
           primaryKey="id"
-          columns={[{ name: "title", label: "Judul" }]}
+          columns={[{ name: "title", label: "Judul" }, { format: (v) => dayjs(v.date_start).format("DD MMM YYYY"),label: "Tanggal Mulai" }, { format: (v) => dayjs(v.date_end).format("DD MMM YYYY"),label: "Tanggal Selesai" }]}
           rows={filteredData}
           rowActions={rowActions}
         />

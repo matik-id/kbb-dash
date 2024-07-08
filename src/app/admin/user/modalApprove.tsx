@@ -72,7 +72,7 @@ const ModalApprove = ({ isOpen, onClose, activeItem }: ModalApproveProps) => {
               <ModalHeader>Setujui Anggota</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-                <h4>Apakah anda yakin akan menyetujui data ini?</h4>
+                <h4>Apakah anda yakin akan menyetujui anggota ini?</h4>
               </ModalBody>
 
               <ModalFooter>

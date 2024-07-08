@@ -105,7 +105,7 @@ export default function Content() {
     },
   ];
 
-  if (statusParam == "pending") {
+  if (statusParam == "new") {
     rowActions.push(
       {
         icon: FaThumbsUp,
