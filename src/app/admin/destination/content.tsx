@@ -36,7 +36,7 @@ export default function Content() {
 
   let filteredData: any[] = [];
 
-  if (isSuccess && data)
+  if (isSuccess && data && data.data && data.data.records)
     filteredData = data.data.records.filter((v) =>
       v.name.toLowerCase().includes(search.toLowerCase())
     );

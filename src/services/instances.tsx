@@ -78,7 +78,6 @@ export const SetupInterceptors = () => {
         localStorage.clear();
         router.push("/auth/sign-in");
       }
-      syncToken();
       return response;
     },
     (error) => {
