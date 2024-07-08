@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Box, Img, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Badge, Box, Img, useDisclosure } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "components/DataTable";
 import TableSkeleton from "components/Skeleton/TableSkeleton";
@@ -11,11 +11,14 @@ import { HiLockOpen } from "react-icons/hi";
 import { userService } from "services";
 import ModalReset from "./modalRpw";
 import ModalDelete from "./modalDelete";
+import { FaThumbsUp } from "react-icons/fa6";
+import ModalApprove from "./modalApprove";
 
-const fecthData = async (role: string | null, q?: string) => {
+const fecthData = async (status: string | null, q?: string) => {
   try {
     const response = await userService.getUsers({
       sort_by: "-updated_at",
+      status: status,
       q,
     });
 
@@ -30,9 +33,10 @@ export default function Content() {
   const [search, setSearch] = useState("");
   const searchParams = useSearchParams();
   const debouncedSearch = useDebounce(search, 400);
-  const roleParam = searchParams.get("role");
+  const statusParam = searchParams.get("status");
   const [activeItem, setActiveItem] = useState<any>(null);
   const deleteModal = useDisclosure();
+  const approveModal = useDisclosure();
   const resetPassUser = useDisclosure();
 
   const handleResetOpen = (data: any) => {
@@ -45,8 +49,8 @@ export default function Content() {
   };
 
   const { data, isLoading, isSuccess, isError, refetch } = useQuery({
-    queryKey: ["users", roleParam, debouncedSearch],
-    queryFn: () => fecthData(roleParam, debouncedSearch),
+    queryKey: ["users", statusParam, debouncedSearch],
+    queryFn: () => fecthData(statusParam, debouncedSearch),
   });
 
   let filteredData: any[] = [];
@@ -75,6 +79,16 @@ export default function Content() {
     deleteModal.onClose();
   };
 
+  const handleApprove = (v: any) => {
+    setActiveItem(v);
+    approveModal.onOpen();
+  };
+
+  const handleApproveClose = () => {
+    refetch();
+    approveModal.onClose();
+  };
+
   let rowActions: any = [
     {
       icon: HiLockOpen,
@@ -90,6 +104,17 @@ export default function Content() {
       colorScheme: "red",
     },
   ];
+
+  if (statusParam == "pending") {
+    rowActions.push(
+      {
+        icon: FaThumbsUp,
+        label: "Setujui",
+        onClick: handleApprove,
+        colorScheme: "teal",
+      },
+    );
+  }
 
   let columns: any = [];
 
@@ -125,7 +150,7 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Anggota"}
+          title={"List Anggota (" + statusParam + ")"}
           onRowClick={handleRowClick}
           primaryKey="id"
           columns={columns}
@@ -146,6 +171,13 @@ export default function Content() {
           activeItem={activeItem}
           isOpen={resetPassUser.isOpen}
           onClose={handleResetClose}
+        />
+      )}
+      {approveModal.isOpen && activeItem && (
+        <ModalApprove
+          activeItem={activeItem}
+          isOpen={approveModal.isOpen}
+          onClose={handleApproveClose}
         />
       )}
     </Box>

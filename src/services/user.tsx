@@ -72,6 +72,7 @@ export interface CreateUserPayload {
 
 export interface GetUserPayload {
     sort_by: string;
+    status?: string;
     q?: string;
 }
 
@@ -84,6 +85,10 @@ export interface GetUsersResponse {
 }
 export interface GetUserResponse extends BaseResponse {
     data: IRecord;
+}
+
+export interface ApproveUserResponse extends BaseResponse {
+    data: string;
 }
 
 export interface ResetPasswordUserPayload {
@@ -124,3 +129,8 @@ export const resetPassUser = async (payload : ResetPasswordUserPayload) => {
     const response = await instance.post(`${url}/rpw`, payload);
     return response.data;
 }
+
+export const approveUser = async (id: string | string[] | undefined): Promise<GetUserResponse> => {
+    const response = await instance.get(`${url}/${id}/approve`);
+    return response.data;
+};

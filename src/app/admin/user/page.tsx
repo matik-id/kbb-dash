@@ -13,14 +13,14 @@ export default function Default() {
   const { onOpen } = useDisclosure();
   const [fixed] = useState(false);
   const searchParams = useSearchParams();
-  const roleParam = searchParams.get("role");
+  const statusParam = searchParams.get("status");
   
   return (
     <>
       <Portal>
         <Box>
           <Navbar
-            urlAddButton={"/admin/user/add?role=" + roleParam}
+            urlAddButton={"/admin/user/add?status=" + statusParam}
             onOpen={onOpen}
             logoText={"Matik Creative Technology"}
             brandText="Anggota"
