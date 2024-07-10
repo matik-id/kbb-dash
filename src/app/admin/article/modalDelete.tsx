@@ -65,7 +65,7 @@ const ModalDelete = ({ isOpen, onClose, activeItem }: ModalDeleteProps) => {
       closeOnOverlayClick={false}
       initialFocusRef={initialRef}
       isOpen={isOpen}
-      size="5xl"
+      size="xl"
       onClose={onClose}
     >
       <ModalOverlay />

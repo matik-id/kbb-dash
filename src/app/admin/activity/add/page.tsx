@@ -137,7 +137,7 @@ export default function Page() {
                 <SimpleGrid columns={1} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="judul"
+                      label="Judul"
                       name="title"
                       placeholder="Judul"
                       type="title"

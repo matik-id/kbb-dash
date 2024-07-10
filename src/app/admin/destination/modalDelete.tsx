@@ -39,7 +39,7 @@ const ModalDelete = ({ isOpen, onClose, activeItem }: ModalDeleteProps) => {
     }
 
     try { 
-      const response = await instance.delete(`/post/${activeItem.id}`);
+      const response = await instance.delete(`/destination/${activeItem.id}`);
 
       if (response.status === 200) {
         onClose(); // Close the modal on successful deletion

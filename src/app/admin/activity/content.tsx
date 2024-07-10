@@ -15,7 +15,7 @@ const fecthData = async (q?: string) => {
   try {
     const response = await postService.getPosts({
       type: "activity",
-      sort_by: "+id"
+      sort_by: "-updated_at",
     });
 
     return response;
@@ -44,7 +44,7 @@ export default function Content() {
     );
 
   const handleEdit = (v: any) => {
-    router.push("/admin/activity/edit/" + v.ID);
+    router.push("/admin/activity/edit/" + v.id);
   };
 
   const handleDelete = (v: any) => {
@@ -59,7 +59,7 @@ export default function Content() {
 
   let rowActions: any = [
     { icon: FiEdit, label: "Edit", onClick: handleEdit, colorScheme: "orange" },
-    { icon: FiTrash, label: "hapus", onClick: handleDelete, colorScheme: "red" },
+    { icon: FiTrash, label: "Hapus", onClick: handleDelete, colorScheme: "red" },
   ];
 
   return (
@@ -73,6 +73,7 @@ export default function Content() {
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
           title={"List Kegiatan"}
+          navigateRow={(row: any) => `/admin/activity/view/${row.id}`}
           primaryKey="id"
           columns={[{ name: "title", label: "Judul" }, { format: (v) => dayjs(v.date_start).format("DD MMM YYYY"),label: "Tanggal Mulai" }, { format: (v) => dayjs(v.date_end).format("DD MMM YYYY"),label: "Tanggal Selesai" }]}
           rows={filteredData}

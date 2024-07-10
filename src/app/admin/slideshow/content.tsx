@@ -58,7 +58,7 @@ export default function Content() {
 
   let rowActions: any = [
     { icon: FiEdit, label: "Edit", onClick: handleEdit, colorScheme: "orange" },
-    { icon: FiTrash, label: "hapus", onClick: handleDelete, colorScheme: "red" },
+    { icon: FiTrash, label: "Hapus", onClick: handleDelete, colorScheme: "red" },
   ];
 
   return (

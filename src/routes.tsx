@@ -8,6 +8,8 @@ import { FaUsers } from "react-icons/fa";
 import { MdArticle } from "react-icons/md";
 import { RiSlideshow3Fill } from "react-icons/ri";
 import { MdLocalActivity } from "react-icons/md";
+import { FaRegNewspaper } from "react-icons/fa6";
+import { FaPeopleRobbery } from "react-icons/fa6";
 
 
 export interface IRoute {
@@ -65,10 +67,10 @@ export const routes: Array<IRoute> = [
     icon: RiSlideshow3Fill,
   },
   {
-    name: 'Artikel',
+    name: 'Berita',
     layout: '/admin',
     path: '/article',
-    icon: MdArticle,
+    icon: FaRegNewspaper,
   },
   {
     name: 'Kegiatan',

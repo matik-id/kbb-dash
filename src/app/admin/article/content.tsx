@@ -14,7 +14,7 @@ const fecthData = async (q?: string) => {
   try {
     const response = await postService.getPosts({
       type: "article",
-      sort_by: "+id",
+      sort_by: "-updated_at",
     });
 
     return response;
@@ -43,7 +43,7 @@ export default function Content() {
     );
 
   const handleEdit = (v: any) => {
-    router.push("/admin/article/edit/" + v.ID);
+    router.push("/admin/article/edit/" + v.id);
   };
 
   const handleDelete = (v: any) => {
@@ -58,7 +58,7 @@ export default function Content() {
 
   let rowActions: any = [
     { icon: FiEdit, label: "Edit", onClick: handleEdit, colorScheme: "orange" },
-    { icon: FiTrash, label: "hapus", onClick: handleDelete, colorScheme: "red" }, 
+    { icon: FiTrash, label: "Hapus", onClick: handleDelete, colorScheme: "red" }, 
   ];
 
   return (
@@ -71,7 +71,8 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Artikel"}
+          title={"List Berita"}
+          navigateRow={(row: any) => `/admin/article/view/${row.id}`}
           primaryKey="id"
           columns={[{ name: "title", label: "Judul" }]}
           rows={filteredData}

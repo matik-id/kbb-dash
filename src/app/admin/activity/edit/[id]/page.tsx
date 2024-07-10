@@ -8,27 +8,22 @@ import {
   FormControl,
   useToast,
   Button,
-  Select,
   FormLabel,
-  Input,
-  Spinner,
-  Image,
+  Select,
+  Textarea,
 } from "@chakra-ui/react";
 
 // Assets
 import InputText from "components/Form/InputText";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { postService } from "services";
 import * as Yup from "yup";
-import { instance } from "services/instances";
-import YupPassword from "yup-password";
 import DefaultEditor from "react-simple-wysiwyg";
+import { postService } from "services";
 import UploadImage from "components/UploadImage";
-YupPassword(Yup);
+import { useEffect, useState } from "react";
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   const toast = useToast({
     position: "top",
     variant: "subtle",
@@ -36,29 +31,21 @@ export default function Page() {
   });
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const router = useRouter();
-  const [type, setType] = useState("position");
-  const [isLoadingImage, setIsLoadingImage] = useState(false);
-  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<any>(null);
 
-  const onImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    let img = e.target.files && e.target.files[0];
-    if (!img) {
-      return;
-    }
-
-    try {
-      setIsLoadingImage(true);
-      const body = new FormData();
-      body.append("file", img);
-      const result = await instance.post("/upload/storage", body, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+  useEffect(() => {
+    if (!loading) return;
+    postService.getPost(params.id)
+      .then((res: any) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setLoading(false);
       });
-      setImage(result.data.data.filename);
-      setIsLoadingImage(false);
-    } catch (error) {}
-  };
+  }, [loading, params.id]);
 
   return (
     <>
@@ -79,18 +66,19 @@ export default function Page() {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Berita
+            Edit Berita
           </Text>
           <hr />
           <Formik
             enableReinitialize
             initialValues={{
-              title: "",
-              image: "",
-              content: "",
-              type: "",
-              date_start: "",
-              date_end: "",
+              id: Number(params.id) || 0,
+              title: data?.title || "",
+              image: data?.image || "",
+              content: data?.content || "",
+              type: data?.type || "",
+              date_start: data?.date_start || "",
+              date_end: data?.date_end || "",
               is_publish: true,            
               submit: null,
             }}
@@ -100,15 +88,15 @@ export default function Page() {
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {
                 setStatus({ success: true });
-                setSubmitting(false); 
-                values.type = "article";             
-                await postService.createPost(values);
+                setSubmitting(false);
+                values.type = "activity"; 
+                await postService.updatePost(values);
                 toast({
                   status: "success",
                   title: "Tambah data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/article");
+                router.push("/admin/activity");
               } catch (error: any) {
                 toast({
                   status: "error",
@@ -134,8 +122,8 @@ export default function Page() {
               setFieldValue,
             }) => (
               <form onSubmit={handleSubmit}>
-                <SimpleGrid columns={1} gap="20px" mt={"20px"}>
-                  <FormControl >
+                <SimpleGrid columns={1} mt={"20px"} gap="20px">
+                <FormControl >
                     <InputText
                       label="Judul"
                       name="title"
@@ -165,7 +153,7 @@ export default function Page() {
                 </FormControl>                      
                   <FormControl>
                     <InputText
-                      label="Tanggal mulai"
+                      label="Tanggal Mulai"
                       name="date_start"
                       placeholder="date"
                       type="date"
@@ -187,8 +175,7 @@ export default function Page() {
                       value={values.date_end}
                     />
                   </FormControl>
-                  
-                </SimpleGrid>
+                  </SimpleGrid>
                 <Box mt={"30px"}>
                   <Button
                     colorScheme="green"
