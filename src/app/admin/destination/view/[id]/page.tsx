@@ -195,11 +195,14 @@ export default function Page({ params }: { params: { id: string } }) {
                     <iframe
                       width="100%"
                       height="100%"
-                      src={`https://www.youtube.com/embed/${
-                        data.video.split("v=")[1]
-                      }`}
+                      src={data.video.includes("v=")
+                        ? `https://www.youtube.com/embed/${
+                            data.video.split("v=")[1]
+                          }`
+                        : `https://www.youtube.com/embed/${
+                            data.video.split("/")[data.video.split("/").length - 1]
+                          }`}
                       title="YouTube video player"
-                      frameBorder="0"
                       allowFullScreen
                     />
                   </AspectRatio>
