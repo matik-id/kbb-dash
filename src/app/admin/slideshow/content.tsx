@@ -14,7 +14,7 @@ const fecthData = async (q?: string) => {
   try {
     const response = await postService.getPosts({
       type: "slideshow",
-      sort_by: "+id",
+      sort_by: "-updated_at",
     });
 
     return response;
@@ -43,7 +43,7 @@ export default function Content() {
     );
 
   const handleEdit = (v: any) => {
-    router.push("/admin/post/edit/" + v.ID);
+    router.push("/admin/slideshow/edit/" + v.id);
   };
 
   const handleDelete = (v: any) => {
@@ -72,8 +72,9 @@ export default function Content() {
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
           title={"List Slideshow"}
+          navigateRow={(row: any) => `/admin/slideshow/view/${row.id}`}
           primaryKey="id"
-          columns={[{ name: "title", label: "judul" }]}
+          columns={[{ name: "title", label: "Judul" }]}
           rows={filteredData}
           rowActions={rowActions}
         />

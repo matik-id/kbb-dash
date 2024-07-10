@@ -78,6 +78,8 @@ export default function Page({ params }: { params: { id: string } }) {
                             </AspectRatio>
                         </Box>
 
+                        
+
                         {data.title && (
                             <Text fontSize="2xl" fontWeight="bold" mt={-12}>
                                 <Box dangerouslySetInnerHTML={{ __html: data.title }} />
