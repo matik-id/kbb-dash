@@ -98,42 +98,14 @@ export default function Page({ params }: { params: { id: string } }) {
                 bottom="0"
                 left="0"
                 right="0"
-                p="20px"
-                bgGradient="linear(to-t, blackAlpha.700, transparent)"
-                color={textColorPrimary}
-              >
-                <Text
-                  fontSize="md"
-                  fontWeight="bold"
-                  bg="blackAlpha.700"
-                  color="white"
-                  px="2"
-                  py="1"
-                  border="1px"
-                  borderColor="black"
-                  borderRadius="md"
-                  opacity="0.8"
-                >
-                  {data.category}
-                  <Text
-                    fontSize="3xl"
-                    fontWeight="bold"
-                    color="white"
-                  >
-                    {data.name}
-                  </Text>
-                  <Text
-                    fontSize="md"
-                    color="white"
-                  >
-                    <Icon as={MdLocationPin} color="red" /> {data.address}
-                  </Text>
-                </Text>
+                p="20px" 
+              >               
+                               
               </Box>
             </Box>
 
             {(data.image1 || data.image2 || data.image3) && (
-              <Stack spacing={6}>
+              <Stack spacing={6} mt={-12}>
                 <Heading size="md" mb="4px">
                   Galeri
                 </Heading>
