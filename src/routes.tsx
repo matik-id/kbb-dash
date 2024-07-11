@@ -10,7 +10,8 @@ import { RiSlideshow3Fill } from "react-icons/ri";
 import { MdLocalActivity } from "react-icons/md";
 import { FaRegNewspaper } from "react-icons/fa6";
 import { FaPeopleRobbery } from "react-icons/fa6";
-
+import { FaProductHunt } from "react-icons/fa";
+import { FaBasketShopping } from "react-icons/fa6";
 
 export interface IRoute {
   name: string;
@@ -85,9 +86,15 @@ export const routes: Array<IRoute> = [
     icon: FaUmbrellaBeach,
   },
   {
+    name: 'Produk',
+    layout: '/admin',
+    path: '/product',
+    icon: FaBasketShopping,
+  },
+  {
     name: 'Admin',
     layout: '/admin',
     path: '/operator',
     icon: FaUserCircle,
-  },
+  },  
 ];
