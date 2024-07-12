@@ -9,16 +9,14 @@ import {
   Stack,
   AspectRatio,
   Heading,
-  Icon,
+  Divider,
+  Button,
+  Badge,
 } from "@chakra-ui/react";
-
-// Assets
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { productService } from "services";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { MdLocationPin, MdOutlineOpenInNew } from "react-icons/md";
 
 const fetchDetail = async (id: string | string[] | undefined) => {
   try {
@@ -41,7 +39,7 @@ export default function Page({ params }: { params: { id: string } }) {
     })();
   }, [id]);
 
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const textColorPrimary = useColorModeValue("green.700", "green.300");
 
   const DefaultIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -64,26 +62,20 @@ export default function Page({ params }: { params: { id: string } }) {
           py={{ base: "20px", md: "30px" }}
           w="full"
           mx="auto"
+          boxShadow="2xl"
+          borderRadius="lg"
+          bg={useColorModeValue("white", "gray.800")}
         >
-          <Stack spacing={6}>
+          <Stack spacing={8}>
             {data.title && (
-              <Text fontSize="2xl" fontWeight="bold">
-                <Box dangerouslySetInnerHTML={{ __html: data.title }} />
-              </Text>
+              <Box textAlign="center">
+                <Text fontSize="3xl" fontWeight="bold" mb="4" color="green.500">
+                  {data.title}
+                </Text>
+                <Divider borderColor="green.500" />
+              </Box>
             )}
-            {data.owner && (
-              <Box dangerouslySetInnerHTML={{ __html: `<strong> Nama Pemilik : ${data.owner}</strong>` }} />
-            )}
-
-            {data.phone && (
-              <Box dangerouslySetInnerHTML={{ __html: `<strong> Nomor Telepon : ${data.phone}</strong>` }} />
-            )}
-
-            {data.price && (
-              <Box dangerouslySetInnerHTML={{ __html: `<strong> Harga : ${data.price}</strong>` }} />
-            )}
-
-            <Box position="relative" height="90vh" borderRadius={"md"} overflow="hidden">
+            <Box position="relative" height="60vh" borderRadius="lg" overflow="hidden">
               <AspectRatio ratio={16 / 9}>
                 <Image
                   src={data.thumbnail || "/default-thumbnail.jpg"}
@@ -91,22 +83,49 @@ export default function Page({ params }: { params: { id: string } }) {
                   objectFit="cover"
                   width="100%"
                   height="100%"
+                  transition="transform 0.3s"
+                  _hover={{ transform: "scale(1.05)" }}
                 />
               </AspectRatio>
-              <Box
-                position="absolute"
-                bottom="0"
-                left="0"
-                right="0"
-                p="20px" 
-              >               
-                               
+
+              <Box>
+                <Badge
+                  fontSize="md"
+                  fontWeight="bold"
+                  bg="blackAlpha.700"
+                  px="2"
+                  py="1"
+                  border="1px"
+                  borderColor="black"
+                  borderRadius="md"
+                  opacity="0.8"
+                >
+                  {data.category}
+                </Badge>
               </Box>
             </Box>
 
+            <Box textAlign="center" mt={4}>
+              {data.owner && (
+                <Text fontSize="lg" color={textColorPrimary} mb="2">
+                  <strong>Nama Pemilik: </strong>{data.owner}
+                </Text>
+              )}
+              {data.phone && (
+                <Text fontSize="lg" color={textColorPrimary} mb="2">
+                  <strong>Nomor Telepon: </strong>{data.phone}
+                </Text>
+              )}
+              {data.price && (
+                <Text fontSize="lg" color={textColorPrimary}>
+                  <strong>Harga: </strong>{data.price}
+                </Text>
+              )}
+            </Box>
+
             {(data.image1 || data.image2 || data.image3) && (
-              <Stack spacing={6} mt={-12}>
-                <Heading size="md" mb="4px">
+              <Stack spacing={6} mt={4}>
+                <Heading size="lg" mb="4px" textAlign="center" color="green.500">
                   Galeri
                 </Heading>
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
@@ -117,6 +136,9 @@ export default function Page({ params }: { params: { id: string } }) {
                       overflow="hidden"
                       position="relative"
                       borderRadius="md"
+                      transition="transform 0.3s"
+                      _hover={{ transform: "scale(1.05)" }}
+                      boxShadow="lg"
                     >
                       <Image
                         src={data.image1}
@@ -137,6 +159,9 @@ export default function Page({ params }: { params: { id: string } }) {
                       overflow="hidden"
                       position="relative"
                       borderRadius="md"
+                      transition="transform 0.3s"
+                      _hover={{ transform: "scale(1.05)" }}
+                      boxShadow="lg"
                     >
                       <Image
                         src={data.image2}
@@ -157,6 +182,9 @@ export default function Page({ params }: { params: { id: string } }) {
                       overflow="hidden"
                       position="relative"
                       borderRadius="md"
+                      transition="transform 0.3s"
+                      _hover={{ transform: "scale(1.05)" }}
+                      boxShadow="lg"
                     >
                       <Image
                         src={data.image3}
@@ -174,9 +202,18 @@ export default function Page({ params }: { params: { id: string } }) {
               </Stack>
             )}
 
-
             {data.content && (
-              <Box dangerouslySetInnerHTML={{ __html: data.content }} />
+              <Box
+                mt={6}
+                p={4}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="md"
+                boxShadow="lg"
+                bg={useColorModeValue("gray.50", "gray.700")}
+                color={useColorModeValue("gray.800", "gray.100")}
+                dangerouslySetInnerHTML={{ __html: data.content }}
+              />
             )}
           </Stack>
         </Card>
