@@ -19,7 +19,7 @@ import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import DefaultEditor from "react-simple-wysiwyg";
-import { destinationService } from "services";
+import { donationService } from "services";
 import UploadImage from "components/UploadImage";
 import { useEffect, useState } from "react";
 
@@ -36,7 +36,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (!loading) return;
-    destinationService.getDestination(params.id)
+    donationService.getDonation(params.id)
       .then((res: any) => {
         setData(res.data);
         setLoading(false);
@@ -66,39 +66,40 @@ export default function Page({ params }: { params: { id: string } }) {
             fontSize="2xl"
             mb="4px"
           >
-            Edit Destinasi Wisata
+            Edit Donasi
           </Text>
           <hr />
           <Formik
             enableReinitialize
             initialValues={{
               id: Number(params.id) || 0,
-              name: data?.name || "",
-              category: data?.category || "",
-              coordinate: data?.coordinate || "",
-              thumbnail: data?.thumbnail || "",
-              image1: data?.image1 || "",
-              image2: data?.image2 || "",
-              image3: data?.image3 || "",
-              video: data?.video || "",
-              address: data?.address || "",
+              title: data?.title || "",
+              type: data?.type || "",
+              location: data?.location || "",
+              image: data?.image || "",
+              target_balance: data?.target_balance || "",
+              balance_collected: data?.balance_collected || "",
+              date_start: data?.date_start || "",
+              date_end: data?.date_end || "",
+              is_urgent : false,
+              is_publish : true,         
               content: data?.content || "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required("Kolom ini wajib diisi"),
+              title: Yup.string().required("Kolom ini wajib diisi"),
             })}
             onSubmit={async (values, { setStatus, setSubmitting }) => {
               try {
                 setStatus({ success: true });
                 setSubmitting(false);
-                await destinationService.updateDestination(values);
+                await donationService.updateDonation(values);
                 toast({
                   status: "success",
                   title: "Edit data berhasil",
                   duration: 2000,
                 });
-                router.push("/admin/destination");
+                router.push("/admin/donation");
               } catch (error: any) {
                 toast({
                   status: "error",
@@ -125,108 +126,95 @@ export default function Page({ params }: { params: { id: string } }) {
             }) => (
               <form onSubmit={handleSubmit}>
                 <SimpleGrid columns={1} mt={"20px"} gap="20px">
-                  <FormControl>
+                <FormControl>
                     <InputText
-                      label="Nama Wisata"
-                      name="name"
-                      placeholder="Masukkan Nama Wisata"
+                      label="Tema Donasi"
+                      name="title"
+                      placeholder="Masukkan Tema Donasi"
                       type="text"
-                      error={touched.name ? errors.name : ""}
+                      error={touched.title ? errors.title : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.name}
+                      value={values.title}
                     />
                   </FormControl>
                   <FormControl>
+                    <InputText
+                      label="Lokasi"
+                      name="location"
+                      placeholder="Lokasi"
+                      type="text"
+                      error={touched.location ? errors.location : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.location}
+                    />
+                  </FormControl>
+                  <UploadImage
+                    name="image"
+                    label="Gambar"
+                    value={values.image}
+                    onChange={(e) => setFieldValue("image", e)}
+                  />              
+                  <FormControl>
                     <FormLabel>Konten</FormLabel>
                     <DefaultEditor
-                      style={{ height: "500px" }}
+                      style={{ height: "200px" }}
                       name="content"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.content}
                     />
                   </FormControl>
-                </SimpleGrid>
-                <SimpleGrid columns={2} gap="20px" mt={"20px"}>
                   <FormControl>
                     <InputText
-                      label="Video Youtube"
-                      name="video"
-                      placeholder="Masukkan Link Video Youtube"
-                      type="text"
-                      error={touched.video ? errors.video : ""}
+                      label="Target Saldo"
+                      name="target_balance"
+                      placeholder="Target Saldo"
+                      type="number"
+                      error={touched.target_balance ? errors.target_balance : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.video}
+                      value={values.target_balance}
                     />
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="Koordinat"
-                      name="coordinate"
-                      placeholder="Masukkan Koordinat"
-                      type="text"
-                      error={touched.coordinate ? errors.coordinate : ""}
+                      label="Saldo Diterima"
+                      name="balance_collected"
+                      placeholder="Target Saldo"
+                      type="number"
+                      error={touched.balance_collected ? errors.balance_collected : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.coordinate}
+                      value={values.balance_collected}
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Kategori</FormLabel>
-                    <Select
-                      placeholder="Pilih Kategori"
-                      name="category"
+                    <InputText
+                      label="Tanggal Mulai"
+                      name="date_start"
+                      placeholder="Tanggal Mulai"
+                      type="date"
+                      error={touched.date_start ? errors.date_start : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.category}
-                    >
-                      <option value="">- Pilih Kategori -</option>
-                      <option value="Kalsel">Kalsel</option>
-                      <option value="Kaltim">Kaltim</option>
-                      <option value="Kalteng">Kalteng</option>
-                      <option value="Kalbar">Kalbar</option>
-                    </Select>
+                      value={values.date_start}
+                    />
                   </FormControl>
                   <FormControl>
-                    <FormControl>
-                      <FormLabel>Alamat</FormLabel>
-                      <Textarea
-                        placeholder="Masukkan Alamat"
-                        name="address"
-                        onChange={handleChange}
-                        value={values.address}
-                      />
-                    </FormControl>
+                    <InputText
+                      label="Tanggal Akhir"
+                      name="date_end"
+                      placeholder="Tanggal Akhir"
+                      type="date"
+                      error={touched.date_end ? errors.date_end : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.date_end}
+                    />
                   </FormControl>
-                </SimpleGrid>
-                <SimpleGrid columns={4} gap="20px" mt={"20px"}>
-                  <UploadImage
-                    name="thumbnail"
-                    label="Thumbnail"
-                    value={values.thumbnail}
-                    onChange={(e) => setFieldValue("thumbnail", e)}
-                  />
-                  <UploadImage
-                    name="image1"
-                    label="Image1"
-                    value={values.image1}
-                    onChange={(e) => setFieldValue("image1", e)}
-                  />
-                  <UploadImage
-                    name="image2"
-                    label="Image2"
-                    value={values.image2}
-                    onChange={(e) => setFieldValue("image2", e)}
-                  />
-                  <UploadImage
-                    name="image3"
-                    label="Image3"
-                    value={values.image3}
-                    onChange={(e) => setFieldValue("image3", e)}
-                  />
-                </SimpleGrid>
+                  </SimpleGrid>
                 <SimpleGrid columns={3} gap="20px" mt={"20px"}></SimpleGrid>
                 <Box mt={"30px"}>
                   <Button

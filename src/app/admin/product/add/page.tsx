@@ -159,7 +159,7 @@ export default function Page() {
                   <FormControl>
                     <FormLabel>Konten</FormLabel>
                     <DefaultEditor
-                      style={{ height: "500px" }}
+                      style={{ height: "250px" }}
                       name="content"
                       onBlur={handleBlur}
                       onChange={handleChange}

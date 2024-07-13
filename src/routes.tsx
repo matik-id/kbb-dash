@@ -12,6 +12,7 @@ import { FaRegNewspaper } from "react-icons/fa6";
 import { FaPeopleRobbery } from "react-icons/fa6";
 import { FaProductHunt } from "react-icons/fa";
 import { FaBasketShopping } from "react-icons/fa6";
+import { BiSolidDonateHeart } from "react-icons/bi";
 
 export interface IRoute {
   name: string;
@@ -91,6 +92,12 @@ export const routes: Array<IRoute> = [
     path: '/product',
     icon: FaBasketShopping,
   },
+  {
+    name: 'Galang Dana',
+    layout: '/admin',
+    path: '/donation',
+    icon: BiSolidDonateHeart,
+  }, 
   {
     name: 'Admin',
     layout: '/admin',

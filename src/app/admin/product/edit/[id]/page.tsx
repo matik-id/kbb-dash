@@ -66,7 +66,7 @@ export default function Page({ params }: { params: { id: string } }) {
             fontSize="2xl"
             mb="4px"
           >
-            Edit Destinasi Wisata
+            Edit Produk
           </Text>
           <hr />
           <Formik
@@ -94,7 +94,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 await productService.updateProduct(values);
                 toast({
                   status: "success",
-                  title: "Tambah data berhasil",
+                  title: "Edit data berhasil",
                   duration: 2000,
                 });
                 router.push("/admin/product");
@@ -175,7 +175,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   <FormControl>
                     <FormLabel>Konten</FormLabel>
                     <DefaultEditor
-                      style={{ height: "500px" }}
+                      style={{ height: "250px" }}
                       name="content"
                       onBlur={handleBlur}
                       onChange={handleChange}

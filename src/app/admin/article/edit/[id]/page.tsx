@@ -93,7 +93,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 await postService.updatePost(values);
                 toast({
                   status: "success",
-                  title: "Tambah data berhasil",
+                  title: "Edit data berhasil",
                   duration: 2000,
                 });
                 router.push("/admin/article");

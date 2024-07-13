@@ -96,7 +96,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
                         {data.date_end && (
                             <Text fontSize="l" fontWeight="bold">
-                                <Box dangerouslySetInnerHTML={{ __html: `<strong>Tanggal Akhir: ${data.date_end}</strong>` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `<strong>Tanggal Selesai: ${data.date_end}</strong>` }} />
                             </Text>
                         )}
 

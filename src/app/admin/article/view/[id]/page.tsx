@@ -88,18 +88,6 @@ export default function Page({ params }: { params: { id: string } }) {
                             <Box dangerouslySetInnerHTML={{ __html: data.content }} />
                         )}
 
-                        {data.date_start && (
-                            <Text fontSize="l" fontWeight="bold">
-                                <Box dangerouslySetInnerHTML={{ __html: `<strong>Tanggal Mulai: ${data.date_start}</strong>` }} />
-                            </Text>
-                        )}
-
-                        {data.date_end && (
-                            <Text fontSize="l" fontWeight="bold">
-                                <Box dangerouslySetInnerHTML={{ __html: `<strong>Tanggal Akhir: ${data.date_end}</strong>` }} />
-                            </Text>
-                        )}
-
                     </Stack>
                 </Card>
             )}
