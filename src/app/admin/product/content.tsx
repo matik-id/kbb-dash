@@ -70,7 +70,7 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Product"}
+          title={"List Produk"}
           navigateRow={(row: any) => `/admin/product/view/${row.id}`}
           primaryKey="id"
           columns={[{ name: "title", label: "Nama Produk" }, { name: "owner", label: "Pemilik" }, {name: "price", label: "Harga"}]}

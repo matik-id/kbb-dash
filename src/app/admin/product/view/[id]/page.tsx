@@ -10,7 +10,6 @@ import {
   AspectRatio,
   Heading,
   Divider,
-  Button,
   Badge,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -39,7 +38,7 @@ export default function Page({ params }: { params: { id: string } }) {
     })();
   }, [id]);
 
-  const textColorPrimary = useColorModeValue("green.700", "green.300");
+  const textColorPrimary = useColorModeValue("green.600", "green.300");
 
   const DefaultIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -69,10 +68,10 @@ export default function Page({ params }: { params: { id: string } }) {
           <Stack spacing={8}>
             {data.title && (
               <Box textAlign="center">
-                <Text fontSize="3xl" fontWeight="bold" mb="4" color="green.500">
+                <Text fontSize="3xl" fontWeight="bold" mb="4" color="green.600">
                   {data.title}
                 </Text>
-                <Divider borderColor="green.500" />
+                <Divider borderColor="green.600" />
               </Box>
             )}
             <Box position="relative" height="60vh" borderRadius="lg" overflow="hidden">
@@ -125,7 +124,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
             {(data.image1 || data.image2 || data.image3) && (
               <Stack spacing={6} mt={4}>
-                <Heading size="lg" mb="4px" textAlign="center" color="green.500">
+                <Heading size="lg" mb="4px" textAlign="center" color="green.600">
                   Galeri
                 </Heading>
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>

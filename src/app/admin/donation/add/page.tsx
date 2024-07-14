@@ -152,9 +152,9 @@ export default function Page() {
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="Target Saldo"
+                      label="Target Donasi"
                       name="target_balance"
-                      placeholder="Target Saldo"
+                      placeholder="Target Donasi"
                       type="number"
                       error={touched.target_balance ? errors.target_balance : ""}
                       onBlur={handleBlur}
@@ -164,9 +164,9 @@ export default function Page() {
                   </FormControl>
                   <FormControl>
                     <InputText
-                      label="Saldo Diterima"
+                      label="Donasi Terkumpul"
                       name="balance_collected"
-                      placeholder="Target Saldo"
+                      placeholder="Donasi yang sudah terkumpul"
                       type="number"
                       error={touched.balance_collected ? errors.balance_collected : ""}
                       onBlur={handleBlur}

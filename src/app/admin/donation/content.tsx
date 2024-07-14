@@ -70,7 +70,7 @@ export default function Content() {
       )}
       {isSuccess && data && filteredData.length > 0 && (
         <DataTable
-          title={"List Donation"}
+          title={"List Donasi"}
           navigateRow={(row: any) => `/admin/donation/view/${row.id}`}
           primaryKey="id"
           columns={[{ name: "title", label: "Tema Donasi" }]}
