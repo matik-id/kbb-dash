@@ -76,7 +76,6 @@ export default function Page() {
               try {
                 setStatus({ success: true });
                 setSubmitting(false);
-                values.type = "humanity"; 
                 await donationService.createDonation(values);
                 toast({
                   status: "success",
@@ -112,15 +111,27 @@ export default function Page() {
                 <SimpleGrid columns={1} mt={"20px"} gap="20px">
                   <FormControl>
                     <InputText
-                      label="Tema Donasi"
+                      label="Judul Donasi"
                       name="title"
-                      placeholder="Masukkan Tema Donasi"
+                      placeholder="Masukkan Judul Donasi"
                       type="text"
                       error={touched.title ? errors.title : ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.title}
                     />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel> Jenis Donasi </FormLabel>
+                    <Select
+                      placeholder="Pilih Jenis Donasi"
+                      value={values.type}
+                      onChange={(e) => setFieldValue("type", e.target.value)}
+                    >
+                      <option value="humanity">Kemanusiaan</option>
+                      <option value="alms">Sedakah</option>
+                      <option value="waqf">Wakaf</option>
+                    </Select>
                   </FormControl>
                   <FormControl>
                     <InputText

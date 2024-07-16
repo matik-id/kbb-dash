@@ -126,7 +126,7 @@ export const getUser = async (id: string | string[] | undefined): Promise<GetUse
 };
 
 export const resetPassUser = async (payload : ResetPasswordUserPayload) => {
-    const response = await instance.post(`${url}/rpw`, payload);
+    const response = await instance.put(`${url+"/"+payload.user}/rpw`, payload);
     return response.data;
 }
 

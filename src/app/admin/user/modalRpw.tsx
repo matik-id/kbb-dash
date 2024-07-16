@@ -46,7 +46,7 @@ const ModalReset = ({ isOpen, onClose, activeItem }: ModalResetProps) => {
       <Formik
         enableReinitialize
         initialValues={{
-          user: activeItem ? activeItem.ID.toString() : "",
+          user: activeItem ? activeItem.id.toString() : "",
           password: "",
           repass: "",
           submit: null,

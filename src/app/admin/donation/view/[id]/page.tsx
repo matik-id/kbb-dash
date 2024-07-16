@@ -122,6 +122,16 @@ export default function Page({ params }: { params: { id: string } }) {
               </Box>
             </Box>
 
+            {data.type && (
+              <Box
+                bg={useColorModeValue("gray.50", "gray.700")}
+                p={4}
+                borderRadius="md"
+                boxShadow="md"
+                dangerouslySetInnerHTML={{ __html: data.type }}
+              />
+            )}
+
             {data.content && (
               <Box
                 bg={useColorModeValue("gray.50", "gray.700")}

@@ -139,6 +139,18 @@ export default function Page({ params }: { params: { id: string } }) {
                     />
                   </FormControl>
                   <FormControl>
+                    <FormLabel> Jenis Donasi </FormLabel>
+                    <Select
+                      placeholder="Pilih Jenis Donasi"
+                      value={values.type}
+                      onChange={(e) => setFieldValue("type", e.target.value)}
+                    >
+                      <option value="humanity">Kemanusiaan</option>
+                      <option value="alms">Sedakah</option>
+                      <option value="waqf">Wakaf</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl>
                     <InputText
                       label="Lokasi"
                       name="location"

@@ -128,8 +128,7 @@ export default function Page() {
               let mode = "Tambah";
               try {
                 setStatus({ success: true });
-                setSubmitting(false);
-                values.photo = photo;
+                setSubmitting(false);            
                 await userService.createUser(values);
                 toast({
                   status: "success",
@@ -344,13 +343,13 @@ export default function Page() {
                   </FormControl>
                   <UploadImage
                     name="photo"
-                    label="Gambar"
+                    label="Foto"
                     value={values.photo}
                     onChange={(e) => setFieldValue("photo", e)}
                   /> 
                   <UploadImage
                     name="file_ktp"
-                    label="Gambar"
+                    label="KTP"
                     value={values.file_ktp}
                     onChange={(e) => setFieldValue("file_ktp", e)}
                   /> 
