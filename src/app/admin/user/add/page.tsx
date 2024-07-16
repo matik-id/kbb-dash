@@ -22,6 +22,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { userService } from "services";
 import { instance } from "services/instances";
 import { useState } from "react";
+import UploadImage from "components/UploadImage";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 YupPassword(Yup);
@@ -100,7 +101,7 @@ export default function Page() {
               photo: "",
               file_ktp: "",
               likes: 0,
-              status: "",
+              status: "active",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
@@ -162,6 +163,18 @@ export default function Page() {
             }) => (
               <form onSubmit={handleSubmit}>
                 <SimpleGrid columns={2} gap="20px" mt={"20px"}>
+                <FormControl>
+                    <InputText
+                      label="Nomor Anggota"
+                      name="number"
+                      placeholder="Nomor Anggota"
+                      type="text"
+                      error={touched.number ? errors.number : ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.number}
+                    />
+                  </FormControl>
                   <FormControl>
                     <InputText
                       label="Nama Lengkap"
@@ -329,30 +342,18 @@ export default function Page() {
                       value={values.nik}
                     />
                   </FormControl>
-                  <FormControl>
-                    <InputText
-                      label="gambar"
-                      name="photo"
-                      placeholder="gambar"
-                      type="text"
-                      error={touched.photo ? errors.photo : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.photo}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <InputText
-                      label="file ktp"
-                      name="file_ktp"
-                      placeholder="foto"
-                      type="text"
-                      error={touched.file_ktp ? errors.file_ktp : ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.file_ktp}
-                    />
-                  </FormControl>
+                  <UploadImage
+                    name="photo"
+                    label="Gambar"
+                    value={values.photo}
+                    onChange={(e) => setFieldValue("photo", e)}
+                  /> 
+                  <UploadImage
+                    name="file_ktp"
+                    label="Gambar"
+                    value={values.file_ktp}
+                    onChange={(e) => setFieldValue("file_ktp", e)}
+                  /> 
                 </SimpleGrid>
                 <Box mt={"30px"}>
                   <Button
