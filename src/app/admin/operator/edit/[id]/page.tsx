@@ -62,7 +62,7 @@ export default function Page({ params }: { params: { id: string } }) {
             fontSize="2xl"
             mb="4px"
           >
-            Tambah Administrator
+            Edit Administrator
           </Text>
           <hr />
           <Formik
@@ -116,7 +116,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   <FormControl>
                     <InputText
                       label="Username (Digunakan untuk Login)"
-                      name="usernname"
+                      name="username"
                       placeholder="Masukkan Username"
                       type="text"
                       error={touched.username ? errors.username : ""}
