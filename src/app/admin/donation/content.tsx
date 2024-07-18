@@ -73,7 +73,7 @@ export default function Content() {
           title={"List Donasi"}
           navigateRow={(row: any) => `/admin/donation/view/${row.id}`}
           primaryKey="id"
-          columns={[{ name: "title", label: "Tema Donasi" }]}
+          columns={[{ name: "title", label: "Judul Donasi" }]}
           rows={filteredData}
           rowActions={rowActions}
         />

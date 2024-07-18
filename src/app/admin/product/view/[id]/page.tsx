@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Card,
@@ -10,7 +11,6 @@ import {
   AspectRatio,
   Divider,
   Button,
-  Badge,
   Flex,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ export default function Page({ params }: { params: { id: string } }) {
     })();
   }, [id]);
 
-  const textColorPrimary = useColorModeValue("green.700", "green.300");
+  const textColorPrimary = useColorModeValue("green.600", "green.300"); // Adjusted color value
 
   const DefaultIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -95,10 +95,10 @@ export default function Page({ params }: { params: { id: string } }) {
                 </AspectRatio>
                 {/* Navigation Buttons */}
                 <Flex justify="center">
-                  <Button colorScheme="teal" size="sm" mx={2} onClick={handlePrevImage}>
+                  <Button colorScheme="green" size="sm" mx={2} onClick={handlePrevImage}>
                     Prev
                   </Button>
-                  <Button colorScheme="teal" size="sm" mx={2} onClick={handleNextImage}>
+                  <Button colorScheme="green" size="sm" mx={2} onClick={handleNextImage}>
                     Next
                   </Button>
                 </Flex>
@@ -110,10 +110,10 @@ export default function Page({ params }: { params: { id: string } }) {
               {/* Product Title */}
               {data.title && (
                 <Box textAlign={{ base: "center", md: "left" }}>
-                  <Text fontSize="3xl" fontWeight="bold" mb="4" color="green.500">
+                  <Text fontSize="3xl" fontWeight="bold" mb="4" color={useColorModeValue("green.600", "green.300")}>
                     {data.title}
                   </Text>
-                  <Divider borderColor="green.500" />
+                  <Divider borderColor={useColorModeValue("green.700", "green.400")} />
                 </Box>
               )}
 
@@ -156,7 +156,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
               {/* Action Button */}
               <Box textAlign={{ base: "center", md: "left" }} mt={6}>
-                <Button colorScheme="teal" size="lg" onClick={() => alert("Button Clicked")}>
+                <Button colorScheme="green" size="lg" onClick={() => alert("Button Clicked")}>
                   Beli Sekarang
                 </Button>
               </Box>
