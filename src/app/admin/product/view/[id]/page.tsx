@@ -29,7 +29,7 @@ const fetchDetail = async (id: string | string[] | undefined) => {
 
 export default function Page({ params }: { params: { id: string } }) {
   const [data, setData] = useState<any>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // State untuk indeks gambar yang sedang ditampilkan
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const id = params.id;
 
   useEffect(() => {
@@ -49,24 +49,16 @@ export default function Page({ params }: { params: { id: string } }) {
 
   L.Marker.prototype.options.icon = DefaultIcon;
 
-  // Fungsi untuk berganti gambar
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 4); // Ganti '4' dengan jumlah maksimum gambar yang Anda miliki
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 4); // Adjust '4' based on the number of images
   };
 
-  // Fungsi untuk berganti gambar ke sebelumnya
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + 4) % 4); // Ganti '4' dengan jumlah maksimum gambar yang Anda miliki
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + 4) % 4); // Adjust '4' based on the number of images
   };
 
   return (
-    <Box
-      mx="auto"
-      p={{ base: "20px", md: "30px" }}
-      minH="100vh"
-      pt="50px"
-      maxW="7xl"
-    >
+    <Box mx="auto" p={{ base: "20px", md: "30px" }} minH="100vh" pt="50px" maxW="7xl">
       {data && (
         <Card
           px={{ base: "20px", md: "30px" }}
@@ -77,57 +69,45 @@ export default function Page({ params }: { params: { id: string } }) {
           borderRadius="lg"
           bg={useColorModeValue("white", "gray.800")}
         >
-          <Flex
-            direction={{ base: "column", md: "row" }}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Box
-              flex="1"
-              position="relative"
-              height={{ base: "40vh", md: "60vh" }}
-              borderRadius="lg"
-              overflow="hidden"
-              mb={{ base: 4, md: 0 }}
-            >
-              {/* Gambar utama */}
-              <Image
-                src={
-                  currentImageIndex === 0
-                    ? data.thumbnail || "/default-thumbnail.jpg"
-                    : currentImageIndex === 1
-                    ? data.image1 || "/default-image.jpg"
-                    : currentImageIndex === 2
-                    ? data.image2 || "/default-image.jpg"
-                    : data.image3 || "/default-image.jpg"
-                }
-                alt="gallery image"
-                objectFit="cover"
-                width="100%"
-                height="100%"
-                transition="transform 0.3s"
-                _hover={{ transform: "scale(1.05)" }}
-                style={{
-                  opacity: 1,
-                  transition: "opacity 0.3s ease-in-out",
-                }}
-              />
-
-              {/* Tombol navigasi */}
-              <Box position="absolute" top="50%" transform="translateY(-50%)" left="10px">
-                <Button colorScheme="teal" size="sm" onClick={handlePrevImage}>
-                  Prev
-                </Button>
-              </Box>
-              <Box position="absolute" top="50%" transform="translateY(-50%)" right="10px">
-                <Button colorScheme="teal" size="sm" onClick={handleNextImage}>
-                  Next
-                </Button>
-              </Box>
+          <Flex direction={{ base: "column", md: "row" }} alignItems="center" justifyContent="center">
+            {/* Image Section */}
+            <Box flex="1" position="relative" borderRadius="lg" overflow="hidden" mb={{ base: 4, md: 0 }}>
+              {/* Image Carousel */}
+              <Stack spacing={4} position="relative">
+                <AspectRatio ratio={16 / 9}>
+                  <Image
+                    src={
+                      currentImageIndex === 0
+                        ? data.thumbnail || "/default-thumbnail.jpg"
+                        : currentImageIndex === 1
+                        ? data.image1 || "/default-image.jpg"
+                        : currentImageIndex === 2
+                        ? data.image2 || "/default-image.jpg"
+                        : data.image3 || "/default-image.jpg"
+                    }
+                    alt="gallery image"
+                    objectFit="cover"
+                    width="100%"
+                    height="100%"
+                    transition="transform 0.3s"
+                    _hover={{ transform: "scale(1.05)" }}
+                  />
+                </AspectRatio>
+                {/* Navigation Buttons */}
+                <Flex justify="center">
+                  <Button colorScheme="teal" size="sm" mx={2} onClick={handlePrevImage}>
+                    Prev
+                  </Button>
+                  <Button colorScheme="teal" size="sm" mx={2} onClick={handleNextImage}>
+                    Next
+                  </Button>
+                </Flex>
+              </Stack>
             </Box>
 
+            {/* Product Information */}
             <Stack flex="1" spacing={8} p={{ base: "20px", md: "30px" }}>
-              {/* Informasi produk */}
+              {/* Product Title */}
               {data.title && (
                 <Box textAlign={{ base: "center", md: "left" }}>
                   <Text fontSize="3xl" fontWeight="bold" mb="4" color="green.500">
@@ -137,6 +117,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 </Box>
               )}
 
+              {/* Owner and Contact */}
               <Box textAlign={{ base: "center", md: "left" }} mt={4}>
                 {data.owner && (
                   <Text fontSize="lg" color={textColorPrimary} mb="2">
@@ -158,7 +139,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 )}
               </Box>
 
-              {/* Konten produk */}
+              {/* Product Description */}
               {data.content && (
                 <Box
                   mt={6}
@@ -173,7 +154,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 />
               )}
 
-              {/* Tombol aksi */}
+              {/* Action Button */}
               <Box textAlign={{ base: "center", md: "left" }} mt={6}>
                 <Button colorScheme="teal" size="lg" onClick={() => alert("Button Clicked")}>
                   Beli Sekarang
