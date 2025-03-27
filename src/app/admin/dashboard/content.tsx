@@ -78,14 +78,6 @@ function App() {
         </VStack>
       </Container>
 
-      {/* Footer Section */}
-      <Box bg="gray.800" color="white" py={6}>
-        <Container maxW="container.xl">
-          <Flex justifyContent="space-between" alignItems="center">
-            <Text>&copy; 2024 KBB Super App. All rights reserved.</Text>
-          </Flex>
-        </Container>
-      </Box>
     </ChakraProvider>
   );
 }
